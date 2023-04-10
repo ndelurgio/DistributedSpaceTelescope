@@ -11,3 +11,4 @@ zlabel("Z (m)")
 axis equal;
 grid on;
 view(90,30);
+hold off;

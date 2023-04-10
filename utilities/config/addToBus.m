@@ -17,4 +17,5 @@ function bus = addToBus(bus,name,type)
     else
         bus.Elements(end+1) = elem;
     end
+    evalin('base','clear slBus*')
 end

@@ -39,30 +39,21 @@ plant.chief.initialConditions.cartesianState.velocityZ_J2000_m = v_ijk(3);
 clear r_ijk v_ijk
 
 %% Generate Bus
-environment = createBus(plant.environment);
-earthProperties = createBus(plant.environment.earthProperties);
-sunProperties = createBus(plant.environment.sunProperties);
-environment = addToBus(environment,"earthProperties","bus");
-environment = addToBus(environment,"sunProperties","bus");
-plantBus = addToBus(plantBus,"environment","bus");
+% Enviornment
+environment         = createBus(plant.environment);
+earthProperties     = createBus(plant.environment.earthProperties);
+sunProperties       = createBus(plant.environment.sunProperties);
+environment         = addToBus(environment,"earthProperties","bus");
+environment         = addToBus(environment,"sunProperties","bus");
+plantBus            = addToBus(plantBus,"environment","bus");
 
-chief = createBus(plant.chief);
-initialConditions = createBus(plant.chief.initialConditions);
-orbitElements = createBus(plant.chief.initialConditions.orbitElements);
-cartesianState = createBus(plant.chief.initialConditions.cartesianState);
-
-initialConditions = addToBus(initialConditions,"orbitElements","bus");
-initialConditions = addToBus(initialConditions,"cartesianState","bus");
-chief = addToBus(chief,"initialConditions","bus");
+% Chief
+chief               = createBus(plant.chief);
+orbitElements       = createBus(plant.chief.initialConditions.orbitElements);
+cartesianState      = createBus(plant.chief.initialConditions.cartesianState);
+initialConditions   = createBus(plant.chief.initialConditions);
+initialConditions   = addToBus(initialConditions,"orbitElements","bus");
+initialConditions   = addToBus(initialConditions,"cartesianState","bus");
+chief               = addToBus(chief,"initialConditions","bus");
 plantBus = addToBus(plantBus,"chief","bus");
-
-%% State
-
-% state = Simulink.Bus;
-% state = addToBus(state,"positionX_J2000_m","real");
-% state = addToBus(state,"positionY_J2000_m","real");
-% state = addToBus(state,"positionZ_J2000_m","real");
-% state = addToBus(state,"velocityX_J2000_m","real");
-% state = addToBus(state,"velocityY_J2000_m","real");
-% state = addToBus(state,"velocityZ_J2000_m","real");
 

@@ -1,8 +1,8 @@
 function doeVector = meanDerivatesJ2(oeVector, J2, Re, n)
 
-a = oeVector{1};
-e = oeVector{2};
-i = oeVector{3};
+a = oeVector(1);
+e = oeVector(2);
+i = oeVector(3);
 
 da = 0;
 de = 0;

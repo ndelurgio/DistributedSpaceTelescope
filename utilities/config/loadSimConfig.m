@@ -7,6 +7,7 @@ plant = struct();
 % Earth Properties 
 plant.environment.earthProperties.radius_m = 6.378e6;
 plant.environment.earthProperties.gravitationalParameter_m3_s2 = 3.986004419e14;
+plant.environment.earthProperties.J2 = 0.108263e-2;
 
 % Sun Properties
 plant.environment.sunProperties.radius_m = 696340e3;

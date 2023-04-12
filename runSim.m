@@ -1,4 +1,4 @@
 out = sim('simulation');
 
 time = out.tout;
-telem = out.logsout;
+telem = extractTimetable(out.logsout);

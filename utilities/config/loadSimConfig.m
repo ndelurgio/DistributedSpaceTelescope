@@ -20,7 +20,7 @@ plant.chief.initialConditions.orbitElements.eccentricity = 0.8111;
 plant.chief.initialConditions.orbitElements.inclination_rad = deg2rad(59);
 plant.chief.initialConditions.orbitElements.longitudeAscendingNode_rad = deg2rad(84);
 plant.chief.initialConditions.orbitElements.argumentPerigee_rad = deg2rad(188);
-plant.chief.initialConditions.orbitElements.MeanAnomaly_rad = deg2rad(0);
+plant.chief.initialConditions.orbitElements.MeanAnomaly_rad = deg2rad(pi);
 
 [r_ijk,v_ijk] = oe2eci(...
     plant.chief.initialConditions.orbitElements.semiMajorAxis_m,...

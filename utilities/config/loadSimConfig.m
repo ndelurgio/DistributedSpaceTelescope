@@ -19,8 +19,8 @@ plant.chief.initialConditions.orbitElements.semiMajorAxis_m = 36943e3;
 plant.chief.initialConditions.orbitElements.eccentricity = 0.8111;
 plant.chief.initialConditions.orbitElements.inclination_rad = deg2rad(59);
 plant.chief.initialConditions.orbitElements.longitudeAscendingNode_rad = deg2rad(84);
-plant.chief.initialConditions.orbitElements.argumentPerigee_rad = deg2rad(188);
-plant.chief.initialConditions.orbitElements.MeanAnomaly_rad = deg2rad(pi);
+plant.chief.initialConditions.orbitElements.argumentPerigee_rad = deg2rad(0);
+plant.chief.initialConditions.orbitElements.MeanAnomaly_rad = deg2rad(340);
 
 [r_ijk,v_ijk] = oe2eci(...
     plant.chief.initialConditions.orbitElements.semiMajorAxis_m,...
@@ -37,6 +37,32 @@ plant.chief.initialConditions.cartesianState.positionZ_J2000_m = r_ijk(3);
 plant.chief.initialConditions.cartesianState.velocityX_J2000_m = v_ijk(1);
 plant.chief.initialConditions.cartesianState.velocityY_J2000_m = v_ijk(2);
 plant.chief.initialConditions.cartesianState.velocityZ_J2000_m = v_ijk(3);
+clear r_ijk v_ijk
+
+%% Deputy Properties
+% Initial Conditions
+plant.deputy.initialConditions.orbitElements.semiMajorAxis_m = 36943e3;
+plant.deputy.initialConditions.orbitElements.eccentricity = 0.8112;
+plant.deputy.initialConditions.orbitElements.inclination_rad = deg2rad(59);
+plant.deputy.initialConditions.orbitElements.longitudeAscendingNode_rad = deg2rad(84);
+plant.deputy.initialConditions.orbitElements.argumentPerigee_rad = deg2rad(0);
+plant.deputy.initialConditions.orbitElements.MeanAnomaly_rad = deg2rad(340);
+
+[r_ijk,v_ijk] = oe2eci(...
+    plant.deputy.initialConditions.orbitElements.semiMajorAxis_m,...
+    plant.deputy.initialConditions.orbitElements.eccentricity,...
+    plant.deputy.initialConditions.orbitElements.inclination_rad,...
+    plant.deputy.initialConditions.orbitElements.longitudeAscendingNode_rad,...
+    plant.deputy.initialConditions.orbitElements.argumentPerigee_rad,...
+    M2nu(plant.deputy.initialConditions.orbitElements.MeanAnomaly_rad,plant.deputy.initialConditions.orbitElements.eccentricity),...
+    plant.environment.earthProperties.gravitationalParameter_m3_s2);
+
+plant.deputy.initialConditions.cartesianState.positionX_J2000_m = r_ijk(1);
+plant.deputy.initialConditions.cartesianState.positionY_J2000_m = r_ijk(2);
+plant.deputy.initialConditions.cartesianState.positionZ_J2000_m = r_ijk(3);
+plant.deputy.initialConditions.cartesianState.velocityX_J2000_m = v_ijk(1);
+plant.deputy.initialConditions.cartesianState.velocityY_J2000_m = v_ijk(2);
+plant.deputy.initialConditions.cartesianState.velocityZ_J2000_m = v_ijk(3);
 clear r_ijk v_ijk
 
 %% Generate Bus
@@ -58,3 +84,7 @@ initialConditions   = addToBus(initialConditions,"cartesianState","bus");
 chief               = addToBus(chief,"initialConditions","bus");
 plantBus = addToBus(plantBus,"chief","bus");
 
+% Deputy
+deputy              = createBus(plant.chief);
+deputy              = addToBus(deputy,"initialConditions","bus");
+plantBus = addToBus(plantBus,"deputy","bus");

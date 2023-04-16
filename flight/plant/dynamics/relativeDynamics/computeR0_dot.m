@@ -1,4 +1,4 @@
-function [r0_dot] = compute_r0_dot(oe0, n0, r0)
+function [r0_dot] = computeR0_dot(oe0, n0, r0)
 
 a0 = oe0(1);
 e0 = oe00(2);

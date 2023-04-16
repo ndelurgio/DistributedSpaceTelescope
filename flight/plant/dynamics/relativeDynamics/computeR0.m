@@ -1,4 +1,4 @@
-function [r0] = compute_r0(cartesianPosition)
+function [r0] = computeR0(cartesianPosition)
 
 X0 = cartesianPosition(1);
 Y0 = cartesianPosition(2);

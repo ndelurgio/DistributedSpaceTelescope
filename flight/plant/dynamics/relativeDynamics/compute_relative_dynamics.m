@@ -1,4 +1,4 @@
-function relativeState_dot = computeRelativeDynamics(relativeState,r0,theta0_dot,theta0_ddot,mu)
+function relativeState_dot = compute_relative_dynamics(relativeState,r0,theta0_dot,theta0_ddot,mu)
 % INPUT relativeState: 6x1 x,y,z,xdot,ydot,zdot
 % OUTPUT relativeState_dot: 6x1 xdot,ydot,zdot,xddot,yddot,zddot
 x = relativeState(1,1);

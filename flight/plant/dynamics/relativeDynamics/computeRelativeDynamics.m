@@ -9,6 +9,7 @@ ydot = relativeState(5,1);
 zdot = relativeState(6,1);
 
 xddot = 2*theta0_dot*ydot + theta0_ddot*y + theta0_dot^2*x - mu*(r0+x)/(((r0+x)^2+y^2+z^2)^(3/2)) + mu/r0^2;
+% xddot = 2*theta0_dot*ydot + theta0_ddot*y + theta0_dot^2*x + 2*mu*x/(((r0+x)^2+y^2+z^2)^(3/2));
 yddot = -2*theta0_dot*xdot - theta0_ddot*x + theta0_dot^2*y - mu*y/(((r0+x)^2+y^2+z^2)^(3/2));
 zddot = -mu*z/(((r0+x)^2+y^2+z^2)^(3/2));
 

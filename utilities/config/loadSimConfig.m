@@ -44,11 +44,11 @@ clear r_ijk v_ijk
 %% Deputy Properties
 % Initial Conditions
 plant.deputy.initialConditions.orbitElements.semiMajorAxis_m = 36943e3;
-plant.deputy.initialConditions.orbitElements.eccentricity = 0.81110001;
-plant.deputy.initialConditions.orbitElements.inclination_rad = deg2rad(59.0001);
+plant.deputy.initialConditions.orbitElements.eccentricity = 0.811101;
+plant.deputy.initialConditions.orbitElements.inclination_rad = deg2rad(59.01);
 plant.deputy.initialConditions.orbitElements.longitudeAscendingNode_rad = deg2rad(84);
 plant.deputy.initialConditions.orbitElements.argumentPerigee_rad = deg2rad(188);
-plant.deputy.initialConditions.orbitElements.MeanAnomaly_rad = deg2rad(0.0001);
+plant.deputy.initialConditions.orbitElements.MeanAnomaly_rad = deg2rad(0.0000);
 
 [r_ijk,v_ijk] = oe2eci(...
     plant.deputy.initialConditions.orbitElements.semiMajorAxis_m,...
@@ -89,6 +89,9 @@ plant.chief.initialConditions.relativeCartesianState.velocityX_RTN_m = -relative
 plant.chief.initialConditions.relativeCartesianState.velocityY_RTN_m = -relativeState(5);
 plant.chief.initialConditions.relativeCartesianState.velocityZ_RTN_m = -relativeState(6);
 clear relativeState
+
+%% Sim Config
+dt = 1;
 
 %% Generate Bus
 % Environment

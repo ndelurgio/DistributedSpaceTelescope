@@ -20,7 +20,7 @@ plant.chief.initialConditions.orbitElements.eccentricity = 0.8111;
 plant.chief.initialConditions.orbitElements.inclination_rad = deg2rad(59);
 plant.chief.initialConditions.orbitElements.longitudeAscendingNode_rad = deg2rad(84);
 plant.chief.initialConditions.orbitElements.argumentPerigee_rad = deg2rad(0);
-plant.chief.initialConditions.orbitElements.MeanAnomaly_rad = deg2rad(340);
+plant.chief.initialConditions.orbitElements.MeanAnomaly_rad = deg2rad(0);
 
 [r_ijk,v_ijk] = oe2eci(...
     plant.chief.initialConditions.orbitElements.semiMajorAxis_m,...
@@ -42,11 +42,11 @@ clear r_ijk v_ijk
 %% Deputy Properties
 % Initial Conditions
 plant.deputy.initialConditions.orbitElements.semiMajorAxis_m = 36943e3;
-plant.deputy.initialConditions.orbitElements.eccentricity = 0.8112;
-plant.deputy.initialConditions.orbitElements.inclination_rad = deg2rad(59);
+plant.deputy.initialConditions.orbitElements.eccentricity = 0.8110001;
+plant.deputy.initialConditions.orbitElements.inclination_rad = deg2rad(59.0001);
 plant.deputy.initialConditions.orbitElements.longitudeAscendingNode_rad = deg2rad(84);
 plant.deputy.initialConditions.orbitElements.argumentPerigee_rad = deg2rad(0);
-plant.deputy.initialConditions.orbitElements.MeanAnomaly_rad = deg2rad(340);
+plant.deputy.initialConditions.orbitElements.MeanAnomaly_rad = deg2rad(0.0001);
 
 [r_ijk,v_ijk] = oe2eci(...
     plant.deputy.initialConditions.orbitElements.semiMajorAxis_m,...

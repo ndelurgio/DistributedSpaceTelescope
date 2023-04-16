@@ -11,6 +11,7 @@ ratioR = (Re / a / (1 - e^2))^2; % Intermediate value
 dOm = -3/2 * n * J2 * ratioR * cos(i);
 dw = 3/4 * n * J2 * ratioR * (5 * cos(i)^2 - 1);
 dM = n + 3/4 * n * J2 * ratioR * sqrt(1 - e^2) * (3 * cos(i)^2 -1);
+% Note that we are using Mean Anomaly, not True Anomaly
 
 doeVector = [da, de, di, dOm, dw, dM];
 

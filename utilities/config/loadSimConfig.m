@@ -42,7 +42,7 @@ clear r_ijk v_ijk
 %% Deputy Properties
 % Initial Conditions
 plant.deputy.initialConditions.orbitElements.semiMajorAxis_m = 36943e3;
-plant.deputy.initialConditions.orbitElements.eccentricity = 0.8110001;
+plant.deputy.initialConditions.orbitElements.eccentricity = 0.81110001;
 plant.deputy.initialConditions.orbitElements.inclination_rad = deg2rad(59.0001);
 plant.deputy.initialConditions.orbitElements.longitudeAscendingNode_rad = deg2rad(84);
 plant.deputy.initialConditions.orbitElements.argumentPerigee_rad = deg2rad(0);

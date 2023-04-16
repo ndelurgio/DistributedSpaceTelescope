@@ -1,8 +1,8 @@
 function [r0_dot] = computeR0_dot(oe0, n0, r0)
 
 a0 = oe0(1);
-e0 = oe00(2);
-i0 = oe00(3);
+e0 = oe0(2);
+i0 = oe0(3);
 Om0 = oe0(4);
 w0 = oe0(5);
 nu0 = oe0(6);

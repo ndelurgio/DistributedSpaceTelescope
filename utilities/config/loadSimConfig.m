@@ -43,7 +43,7 @@ clear r_ijk v_ijk
 
 %% Deputy Properties
 % Initial Conditions
-plant.deputy.initialConditions.orbitElements.semiMajorAxis_m = 36942e3;
+plant.deputy.initialConditions.orbitElements.semiMajorAxis_m = 36940e3;
 plant.deputy.initialConditions.orbitElements.eccentricity = 0.811101;
 plant.deputy.initialConditions.orbitElements.inclination_rad = deg2rad(59.01);
 plant.deputy.initialConditions.orbitElements.longitudeAscendingNode_rad = deg2rad(84);
@@ -91,7 +91,7 @@ plant.chief.initialConditions.relativeCartesianState.velocityZ_RTN_m = -relative
 clear relativeState
 
 %% Sim Config
-dt = 1;
+dt = 6;
 
 %% Generate Bus
 % Environment

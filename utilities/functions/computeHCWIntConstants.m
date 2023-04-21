@@ -4,13 +4,14 @@ function IC_hcw = computeHCWIntConstants(relativeCartesianState0, a, mu)
 
 n = meanMotion(mu, a);
 
-I_matrix = [a*ones(3), zeros(3); zeros(3), a*n*ones(3)];
+I_matrix = [a*eye(3), zeros(3); zeros(3), a*n*eye(3)];
 t_matrix = [1, 0, 1, 0, 0, 0;
             0, 2, 0, 1, 0, 0;
             0, 0, 0, 0, 0, 1;
             0, 1, 0, 0, 0, 0;
             -3/2, 0, -2, 0, 0, 0;
             0, 0, 0, 0, 1, 0];
+I_matrix*t_matrix
 
 IC_hcw = (I_matrix * t_matrix) \ relativeCartesianState0;
 

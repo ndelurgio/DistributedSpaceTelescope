@@ -1,4 +1,4 @@
-function IC_hcw = computeHCWIntConstants(relativeCartesianState0, a, mu)
+function IC_hcw = computeHCWIntConstants(relativeCartesianState0, a, mu,u)
 % Compute the integration constants for the HCW equations using the initial
 % conditions
 

@@ -92,6 +92,7 @@ clear relativeState
 
 %% Sim Config
 dt = 6;
+t_duration = 2*86400;
 max_step_size = 60;
 relative_tolerance = 1e-11;
 

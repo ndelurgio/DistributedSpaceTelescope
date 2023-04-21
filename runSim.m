@@ -1,4 +1,4 @@
-run('loadSimConfig.m');
+% run('loadSimConfig.m');
 out = sim('dynamics');
 
 time = out.tout;

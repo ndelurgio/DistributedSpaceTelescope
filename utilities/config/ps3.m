@@ -15,8 +15,8 @@ plant.environment.sunProperties.gravitationalParameter_m3_s2 = 1.32712440042e20;
 
 %% Chief Properties
 % Initial Conditions
-plant.chief.initialConditions.orbitElements.semiMajorAxis_m = 36943e3;
-plant.chief.initialConditions.orbitElements.eccentricity = 0.8111;
+plant.chief.initialConditions.orbitElements.semiMajorAxis_m = 7000e3;
+plant.chief.initialConditions.orbitElements.eccentricity = 0.001;
 plant.chief.initialConditions.orbitElements.inclination_rad = deg2rad(59);
 plant.chief.initialConditions.orbitElements.longitudeAscendingNode_rad = deg2rad(84);
 plant.chief.initialConditions.orbitElements.argumentPerigee_rad = deg2rad(188);
@@ -43,8 +43,8 @@ clear r_ijk v_ijk
 
 %% Deputy Properties
 % Initial Conditions
-plant.deputy.initialConditions.orbitElements.semiMajorAxis_m = 36943e3;
-plant.deputy.initialConditions.orbitElements.eccentricity = 0.811101;
+plant.deputy.initialConditions.orbitElements.semiMajorAxis_m = 7000e3;
+plant.deputy.initialConditions.orbitElements.eccentricity = 0.002;
 plant.deputy.initialConditions.orbitElements.inclination_rad = deg2rad(59.01);
 plant.deputy.initialConditions.orbitElements.longitudeAscendingNode_rad = deg2rad(84);
 plant.deputy.initialConditions.orbitElements.argumentPerigee_rad = deg2rad(188);
@@ -92,6 +92,7 @@ clear relativeState
 
 %% Sim Config
 dt = 6;
+t_duration = 0.5*86400;
 max_step_size = 60;
 relative_tolerance = 1e-11;
 

@@ -29,7 +29,6 @@ Otherwise , ang will be NaN
 %}
 r_ijk = cartesianState(1:3);
 v_ijk = cartesianState(4:6);
-r_ijk
 
 v = norm( v_ijk ) ;
 r = norm( r_ijk ) ;

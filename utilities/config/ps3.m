@@ -76,18 +76,34 @@ relativeState(4, 1) = plant.deputy.initialConditions.cartesianState.velocityX_J2
 relativeState(5, 1) = plant.deputy.initialConditions.cartesianState.velocityY_J2000_m - plant.chief.initialConditions.cartesianState.velocityY_J2000_m;
 relativeState(6, 1) = plant.deputy.initialConditions.cartesianState.velocityZ_J2000_m - plant.chief.initialConditions.cartesianState.velocityZ_J2000_m;
 relativeState = vI2vRTN(relativeState, theta0_dot, R_eci2rtn);
+
 plant.deputy.initialConditions.relativeCartesianState.positionX_RTN_m = relativeState(1);
 plant.deputy.initialConditions.relativeCartesianState.positionY_RTN_m = relativeState(2);
 plant.deputy.initialConditions.relativeCartesianState.positionZ_RTN_m = relativeState(3);
 plant.deputy.initialConditions.relativeCartesianState.velocityX_RTN_m = relativeState(4);
 plant.deputy.initialConditions.relativeCartesianState.velocityY_RTN_m = relativeState(5);
 plant.deputy.initialConditions.relativeCartesianState.velocityZ_RTN_m = relativeState(6);
+
+plant.deputy.initialConditions.orbitElementDifferences.deltaSemiMajorAxis_m             = plant.deputy.initialConditions.orbitElements.semiMajorAxis_m - plant.chief.initialConditions.orbitElements.semiMajorAxis_m;
+plant.deputy.initialConditions.orbitElementDifferences.deltaEccentricity                = plant.deputy.initialConditions.orbitElements.eccentricity - plant.chief.initialConditions.orbitElements.eccentricity;
+plant.deputy.initialConditions.orbitElementDifferences.deltaInclination_rad             = plant.deputy.initialConditions.orbitElements.inclination_rad - plant.chief.initialConditions.orbitElements.inclination_rad;
+plant.deputy.initialConditions.orbitElementDifferences.deltaLongitudeAscendingNode_rad  = plant.deputy.initialConditions.orbitElements.longitudeAscendingNode_rad - plant.chief.initialConditions.orbitElements.longitudeAscendingNode_rad;
+plant.deputy.initialConditions.orbitElementDifferences.deltaArgumentPerigee_rad         = plant.deputy.initialConditions.orbitElements.argumentPerigee_rad - plant.chief.initialConditions.orbitElements.argumentPerigee_rad;
+plant.deputy.initialConditions.orbitElementDifferences.deltaMeanAnomaly_rad             = plant.deputy.initialConditions.orbitElements.MeanAnomaly_rad - plant.chief.initialConditions.orbitElements.MeanAnomaly_rad;
+
 plant.chief.initialConditions.relativeCartesianState.positionX_RTN_m = -relativeState(1);
 plant.chief.initialConditions.relativeCartesianState.positionY_RTN_m = -relativeState(2);
 plant.chief.initialConditions.relativeCartesianState.positionZ_RTN_m = -relativeState(3);
 plant.chief.initialConditions.relativeCartesianState.velocityX_RTN_m = -relativeState(4);
 plant.chief.initialConditions.relativeCartesianState.velocityY_RTN_m = -relativeState(5);
 plant.chief.initialConditions.relativeCartesianState.velocityZ_RTN_m = -relativeState(6);
+
+plant.chief.initialConditions.orbitElementDifferences.deltaSemiMajorAxis_m             = -plant.deputy.initialConditions.orbitElementDifferences.deltaSemiMajorAxis_m;
+plant.chief.initialConditions.orbitElementDifferences.deltaEccentricity                = -plant.deputy.initialConditions.orbitElementDifferences.deltaEccentricity;
+plant.chief.initialConditions.orbitElementDifferences.deltaInclination_rad             = -plant.deputy.initialConditions.orbitElementDifferences.deltaInclination_rad;
+plant.chief.initialConditions.orbitElementDifferences.deltaLongitudeAscendingNode_rad  = -plant.deputy.initialConditions.orbitElementDifferences.deltaLongitudeAscendingNode_rad;
+plant.chief.initialConditions.orbitElementDifferences.deltaArgumentPerigee_rad         = -plant.deputy.initialConditions.orbitElementDifferences.deltaArgumentPerigee_rad;
+plant.chief.initialConditions.orbitElementDifferences.deltaMeanAnomaly_rad             = -plant.deputy.initialConditions.orbitElementDifferences.deltaMeanAnomaly_rad;
 clear relativeState
 
 %% Sim Config
@@ -110,10 +126,12 @@ chief               = createBus(plant.chief);
 orbitElements       = createBus(plant.chief.initialConditions.orbitElements);
 cartesianState      = createBus(plant.chief.initialConditions.cartesianState);
 relativeCartesianState = createBus(plant.chief.initialConditions.relativeCartesianState);
+orbitElementDifferences = createBus(plant.chief.initialConditions.orbitElementDifferences);
 initialConditions   = createBus(plant.chief.initialConditions);
 initialConditions   = addToBus(initialConditions,"orbitElements","bus");
 initialConditions   = addToBus(initialConditions,"cartesianState","bus");
-initialConditions = addToBus(initialConditions, "relativeCartesianState", "bus");
+initialConditions   = addToBus(initialConditions, "relativeCartesianState", "bus");
+initialConditions   = addToBus(initialConditions,"orbitElementDifferences","bus");
 chief               = addToBus(chief,"initialConditions","bus");
 plantBus = addToBus(plantBus,"chief","bus");
 
@@ -121,3 +139,4 @@ plantBus = addToBus(plantBus,"chief","bus");
 deputy              = createBus(plant.chief);
 deputy              = addToBus(deputy,"initialConditions","bus");
 plantBus = addToBus(plantBus,"deputy","bus");
+

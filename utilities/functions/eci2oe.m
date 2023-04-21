@@ -27,8 +27,9 @@ Argument of latitude , u = w + anom
 True latitude , lambda = Om + w + anom
 Otherwise , ang will be NaN
 %}
-r_ijk = cartesianState(1:3,1);
-v_ijk = cartesianState(4:6,1);
+r_ijk = cartesianState(1:3);
+v_ijk = cartesianState(4:6);
+r_ijk
 
 v = norm( v_ijk ) ;
 r = norm( r_ijk ) ;
@@ -46,50 +47,56 @@ a = - mu/(2* mechEnergy ) ;
 else % Parabolic orbit
 a = inf ;
 end
-% Compute the orientation of the orbit
-i = acos( hVec(3)/ h ) ;
-Om = acos( nVec(1)/ n ) ;
-w = acos( dot( nVec , eVec )/( n * e ) ) ;
-anom = acos( dot( eVec , r_ijk )/( e * r ) ) ;
-% Place angles in the correct range :
-if nVec(2) < 0
-Om = 2*pi - Om ;
+if hVec(3)/ h < 1 && hVec(3)/ h > -1
+    % Compute the orientation of the orbit
+    i = acos( hVec(3)/ h ) ;
+    Om = acos( nVec(1)/ n ) ;
+    w = acos( dot( nVec , eVec )/( n * e ) ) ;
+    anom = acos( dot( eVec , r_ijk )/( e * r ) ) ;
+    % Place angles in the correct range :
+    if nVec(2) < 0
+        Om = 2*pi - Om ;
+    end
+    if eVec(3) < 0
+        w = 2*pi - w ;
+    end
+    if dot( r_ijk , v_ijk ) < 0
+        anom = 2*pi - anom ;
+    end
+    % Account for special cases
+    % if i == 0 && e ~= 0 % Elliptical equatorial
+    % % Provide the longitude of periapsis ( PI = Om + w )
+    % ang = acos( eVec(1)/ e ) ;
+    % if eVec(2) < 0
+    % ang = 360 - ang ;
+    % end
+    % elseif i ~= 0 && e == 0 % Circular inclined
+    % % Provide the argument of latitude ( u = w + anom )
+    % ang = acos( dot( nVec , r_ijk )/( n * r ) ) ;
+    % if r_ijk(3) < 0
+    % ang = 360 - ang ;
+    % end
+    % elseif i == 0 && e == 0 % Circular equatorial
+    % % Provide the true latitude ( lambda = Om + w + anom )
+    % ang = acos( r_ijk(1)/ r ) ;
+    % if r_ijk(2) < 0
+    % ang = 360 - ang ;
+    % end
+    % else
+    % % Default
+    % ang = NaN ;
+    % end
+    % Assign everything to struct :
+    oe = zeros(6,1);
+    oe(1,1) = a ;
+    oe(2,1) = e ;
+    oe(3,1) = i ;
+    oe(4,1) = Om ;
+    oe(5,1) = w ;
+    oe(6,1) = anom ;
+else
+    oe = cartesianState;
+    return
 end
-if eVec(3) < 0
-w = 2*pi - w ;
-end
-if dot( r_ijk , v_ijk ) < 0
-anom = 2*pi - anom ;
-end
-% Account for special cases
-% if i == 0 && e ~= 0 % Elliptical equatorial
-% % Provide the longitude of periapsis ( PI = Om + w )
-% ang = acos( eVec(1)/ e ) ;
-% if eVec(2) < 0
-% ang = 360 - ang ;
-% end
-% elseif i ~= 0 && e == 0 % Circular inclined
-% % Provide the argument of latitude ( u = w + anom )
-% ang = acos( dot( nVec , r_ijk )/( n * r ) ) ;
-% if r_ijk(3) < 0
-% ang = 360 - ang ;
-% end
-% elseif i == 0 && e == 0 % Circular equatorial
-% % Provide the true latitude ( lambda = Om + w + anom )
-% ang = acos( r_ijk(1)/ r ) ;
-% if r_ijk(2) < 0
-% ang = 360 - ang ;
-% end
-% else
-% % Default
-% ang = NaN ;
-% end
-% Assign everything to struct :
-oe = zeros(6,1);
-oe(1,1) = a ;
-oe(2,1) = e ;
-oe(3,1) = i ;
-oe(4,1) = Om ;
-oe(5,1) = w ;
-oe(6,1) = anom ;
+
 end

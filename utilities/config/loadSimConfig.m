@@ -20,7 +20,7 @@ plant.chief.initialConditions.orbitElements.eccentricity = 0.8111;
 plant.chief.initialConditions.orbitElements.inclination_rad = deg2rad(59);
 plant.chief.initialConditions.orbitElements.longitudeAscendingNode_rad = deg2rad(84);
 plant.chief.initialConditions.orbitElements.argumentPerigee_rad = deg2rad(188);
-plant.chief.initialConditions.orbitElements.MeanAnomaly_rad = deg2rad(180);
+plant.chief.initialConditions.orbitElements.MeanAnomaly_rad = deg2rad(180.1);
 
 [r_ijk,v_ijk] = oe2eci(...
     plant.chief.initialConditions.orbitElements.semiMajorAxis_m,...
@@ -43,12 +43,12 @@ clear r_ijk v_ijk
 
 %% Deputy Properties
 % Initial Conditions
-plant.deputy.initialConditions.orbitElements.semiMajorAxis_m = 36938e3;
+plant.deputy.initialConditions.orbitElements.semiMajorAxis_m = 36943e3;
 plant.deputy.initialConditions.orbitElements.eccentricity = 0.811101;
 plant.deputy.initialConditions.orbitElements.inclination_rad = deg2rad(59.01);
 plant.deputy.initialConditions.orbitElements.longitudeAscendingNode_rad = deg2rad(84);
 plant.deputy.initialConditions.orbitElements.argumentPerigee_rad = deg2rad(188);
-plant.deputy.initialConditions.orbitElements.MeanAnomaly_rad = deg2rad(180.0000);
+plant.deputy.initialConditions.orbitElements.MeanAnomaly_rad = deg2rad(180.1);
 
 [r_ijk,v_ijk] = oe2eci(...
     plant.deputy.initialConditions.orbitElements.semiMajorAxis_m,...
@@ -91,7 +91,7 @@ plant.chief.initialConditions.relativeCartesianState.velocityZ_RTN_m = -relative
 clear relativeState
 
 %% Sim Config
-dt = 0.05;
+dt = 6;
 max_step_size = 60;
 relative_tolerance = 1e-11;
 

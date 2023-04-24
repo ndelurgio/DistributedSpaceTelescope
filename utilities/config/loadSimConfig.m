@@ -89,8 +89,7 @@ plant.chief.initialConditions.relativeCartesianState.velocityX_RTN_m = -relative
 plant.chief.initialConditions.relativeCartesianState.velocityY_RTN_m = -relativeState(5);
 plant.chief.initialConditions.relativeCartesianState.velocityZ_RTN_m = -relativeState(6);
 
-clear relativeState
-
+clear theta0_dot R_eci2rtn
 %% Orbit Element Differences
 
 plant.deputy.initialConditions.orbitElementDifferences.deltaSemiMajorAxis_m             = plant.deputy.initialConditions.orbitElements.semiMajorAxis_m - plant.chief.initialConditions.orbitElements.semiMajorAxis_m;
@@ -107,7 +106,7 @@ plant.chief.initialConditions.orbitElementDifferences.deltaLongitudeAscendingNod
 plant.chief.initialConditions.orbitElementDifferences.deltaArgumentPerigee_rad         = -plant.deputy.initialConditions.orbitElementDifferences.deltaArgumentPerigee_rad;
 plant.chief.initialConditions.orbitElementDifferences.deltaMeanAnomaly_rad             = -plant.deputy.initialConditions.orbitElementDifferences.deltaMeanAnomaly_rad;
 
-%% Integration Constants
+%% HCW Integration Constants
 HCWIntConstantsDeputy = computeHCWIntConstants([plant.deputy.initialConditions.relativeCartesianState.positionX_RTN_m,plant.deputy.initialConditions.relativeCartesianState.positionY_RTN_m,plant.deputy.initialConditions.relativeCartesianState.positionZ_RTN_m,plant.deputy.initialConditions.relativeCartesianState.velocityX_RTN_m,plant.deputy.initialConditions.relativeCartesianState.velocityY_RTN_m,plant.deputy.initialConditions.relativeCartesianState.velocityZ_RTN_m]',plant.chief.initialConditions.orbitElements.semiMajorAxis_m,plant.environment.earthProperties.gravitationalParameter_m3_s2);
 HCWIntConstantsChief  = computeHCWIntConstants([plant.chief.initialConditions.relativeCartesianState.positionX_RTN_m,plant.chief.initialConditions.relativeCartesianState.positionY_RTN_m,plant.chief.initialConditions.relativeCartesianState.positionZ_RTN_m,plant.chief.initialConditions.relativeCartesianState.velocityX_RTN_m,plant.chief.initialConditions.relativeCartesianState.velocityY_RTN_m,plant.chief.initialConditions.relativeCartesianState.velocityZ_RTN_m]',plant.chief.initialConditions.orbitElements.semiMajorAxis_m,plant.environment.earthProperties.gravitationalParameter_m3_s2);
 
@@ -126,8 +125,31 @@ plant.chief.initialConditions.integrationConstants_HCW.K4 = HCWIntConstantsChief
 plant.chief.initialConditions.integrationConstants_HCW.K5 = HCWIntConstantsChief(5);
 plant.chief.initialConditions.integrationConstants_HCW.K6 = HCWIntConstantsChief(6);
 
-
 clear HCWIntConstantsDeputy HCWIntConstantsChief
+%% YA Integration Constants
+nuChief = M2nu(plant.chief.initialConditions.orbitElements.MeanAnomaly_rad, plant.chief.initialConditions.orbitElements.eccentricity);
+nuDeputy = M2nu(plant.deputy.initialConditions.orbitElements.MeanAnomaly_rad, plant.deputy.initialConditions.orbitElements.eccentricity);
+
+YAIntConstantsDeputy = computeYAIntConstants(relativeState,plant.chief.initialConditions.orbitElements.semiMajorAxis_m,plant.chief.initialConditions.orbitElements.eccentricity,nuChief,plant.environment.earthProperties.gravitationalParameter_m3_s2);
+YAIntConstantsChief  = computeYAIntConstants(relativeState,plant.deputy.initialConditions.orbitElements.semiMajorAxis_m,plant.deputy.initialConditions.orbitElements.eccentricity,nuDeputy,plant.environment.earthProperties.gravitationalParameter_m3_s2);
+
+plant.deputy.initialConditions.integrationConstants_YA.K1 = YAIntConstantsDeputy(1);
+plant.deputy.initialConditions.integrationConstants_YA.K2 = YAIntConstantsDeputy(2);
+plant.deputy.initialConditions.integrationConstants_YA.K3 = YAIntConstantsDeputy(3);
+plant.deputy.initialConditions.integrationConstants_YA.K4 = YAIntConstantsDeputy(4);
+plant.deputy.initialConditions.integrationConstants_YA.K5 = YAIntConstantsDeputy(5);
+plant.deputy.initialConditions.integrationConstants_YA.K6 = YAIntConstantsDeputy(6);
+
+plant.chief.initialConditions.integrationConstants_YA.K1 = YAIntConstantsChief(1);
+plant.chief.initialConditions.integrationConstants_YA.K2 = YAIntConstantsChief(2);
+plant.chief.initialConditions.integrationConstants_YA.K3 = YAIntConstantsChief(3);
+plant.chief.initialConditions.integrationConstants_YA.K4 = YAIntConstantsChief(4);
+plant.chief.initialConditions.integrationConstants_YA.K5 = YAIntConstantsChief(5);
+plant.chief.initialConditions.integrationConstants_YA.K6 = YAIntConstantsChief(6);
+
+clear YAIntConstantsDeputy YAIntConstantsChief nuChief nuDeputy
+
+clear relativeState
 %% Sim Config
 dt = 6;
 t_duration = 2*86400;
@@ -150,6 +172,7 @@ cartesianState      = createBus(plant.chief.initialConditions.cartesianState);
 relativeCartesianState = createBus(plant.chief.initialConditions.relativeCartesianState);
 orbitElementDifferences = createBus(plant.chief.initialConditions.orbitElementDifferences);
 integrationConstants_HCW = createBus(plant.chief.initialConditions.integrationConstants_HCW);
+integrationConstants_YA = createBus(plant.chief.initialConditions.integrationConstants_YA);
 
 initialConditions   = createBus(plant.chief.initialConditions);
 initialConditions   = addToBus(initialConditions,"orbitElements","bus");
@@ -157,6 +180,7 @@ initialConditions   = addToBus(initialConditions,"cartesianState","bus");
 initialConditions   = addToBus(initialConditions, "relativeCartesianState", "bus");
 initialConditions   = addToBus(initialConditions,"orbitElementDifferences","bus");
 initialConditions   = addToBus(initialConditions,"integrationConstants_HCW","bus");
+initialConditions   = addToBus(initialConditions,"integrationConstants_YA","bus");
 chief               = addToBus(chief,"initialConditions","bus");
 plantBus = addToBus(plantBus,"chief","bus");
 

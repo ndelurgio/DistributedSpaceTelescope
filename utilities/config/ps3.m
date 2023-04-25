@@ -256,6 +256,37 @@ plant.chief.initialConditions.eccentricQuasiNonsingularROE.relativeInclinationX 
 plant.chief.initialConditions.eccentricQuasiNonsingularROE.relativeInclinationY = -eccentricQNSROE(6);
 
 clear eccentricQNSROE
+%% D'Amico Relative Orbit Elements
+damicoROE = computeROE_damico([ ...
+    plant.chief.initialConditions.meanOrbitElements.semiMajorAxis_m, ...
+    plant.chief.initialConditions.meanOrbitElements.eccentricity, ...
+    plant.chief.initialConditions.meanOrbitElements.inclination_rad, ...
+    plant.chief.initialConditions.meanOrbitElements.longitudeAscendingNode_rad, ...
+    plant.chief.initialConditions.meanOrbitElements.argumentPerigee_rad, ...
+    plant.chief.initialConditions.meanOrbitElements.MeanAnomaly_rad...
+    ],[ ...
+    plant.deputy.initialConditions.meanOrbitElements.semiMajorAxis_m, ...
+    plant.deputy.initialConditions.meanOrbitElements.eccentricity, ...
+    plant.deputy.initialConditions.meanOrbitElements.inclination_rad, ...
+    plant.deputy.initialConditions.meanOrbitElements.longitudeAscendingNode_rad, ...
+    plant.deputy.initialConditions.meanOrbitElements.argumentPerigee_rad, ...
+    plant.deputy.initialConditions.meanOrbitElements.MeanAnomaly_rad...
+    ]);
+plant.deputy.initialConditions.damicoROE.relativeSemiMajorAxis = damicoROE(1);
+plant.deputy.initialConditions.damicoROE.relativeLongitude = damicoROE(2);
+plant.deputy.initialConditions.damicoROE.relativeEccentricityX = damicoROE(3);
+plant.deputy.initialConditions.damicoROE.relativeEccentricityY = damicoROE(4);
+plant.deputy.initialConditions.damicoROE.relativeInclinationX = damicoROE(5);
+plant.deputy.initialConditions.damicoROE.relativeInclinationY = damicoROE(6);
+
+plant.chief.initialConditions.damicoROE.relativeSemiMajorAxis = -damicoROE(1);
+plant.chief.initialConditions.damicoROE.relativeLongitude = -damicoROE(2);
+plant.chief.initialConditions.damicoROE.relativeEccentricityX = -damicoROE(3);
+plant.chief.initialConditions.damicoROE.relativeEccentricityY = -damicoROE(4);
+plant.chief.initialConditions.damicoROE.relativeInclinationX = -damicoROE(5);
+plant.chief.initialConditions.damicoROE.relativeInclinationY = -damicoROE(6);
+
+clear damicoROE
 %% Sim Config
 dt = 6;
 t_duration = 2*86400;
@@ -282,6 +313,7 @@ integrationConstants_HCW = createBus(plant.chief.initialConditions.integrationCo
 integrationConstants_YA = createBus(plant.chief.initialConditions.integrationConstants_YA);
 eccentricSingularROE = createBus(plant.chief.initialConditions.eccentricSingularROE);
 eccentricQuasiNonsingularROE = createBus(plant.chief.initialConditions.eccentricQuasiNonsingularROE);
+damicoROE = createBus(plant.chief.initialConditions.damicoROE);
 
 initialConditions   = createBus(plant.chief.initialConditions);
 initialConditions   = addToBus(initialConditions,"meanOrbitElements","bus");
@@ -293,6 +325,7 @@ initialConditions   = addToBus(initialConditions,"integrationConstants_HCW","bus
 initialConditions   = addToBus(initialConditions,"integrationConstants_YA","bus");
 initialConditions   = addToBus(initialConditions,"eccentricSingularROE","bus");
 initialConditions   = addToBus(initialConditions,"eccentricQuasiNonsingularROE","bus");
+initialConditions   = addToBus(initialConditions,"damicoROE","bus");
 chief               = addToBus(chief,"initialConditions","bus");
 plantBus = addToBus(plantBus,"chief","bus");
 
@@ -300,6 +333,3 @@ plantBus = addToBus(plantBus,"chief","bus");
 deputy              = createBus(plant.chief);
 deputy              = addToBus(deputy,"initialConditions","bus");
 plantBus = addToBus(plantBus,"deputy","bus");
-
-%% Generate Other Useful Busses
-OrbitElements   = createBus(plant.chief.initialConditions.meanOrbitElements);

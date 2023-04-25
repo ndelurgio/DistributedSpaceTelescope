@@ -61,8 +61,8 @@ clear r_ijk v_ijk
 %% Deputy Properties
 % Initial Conditions
 plant.deputy.initialConditions.meanOrbitElements.semiMajorAxis_m = 36943e3;
-plant.deputy.initialConditions.meanOrbitElements.eccentricity = 0.811101;
-plant.deputy.initialConditions.meanOrbitElements.inclination_rad = deg2rad(59.01);
+plant.deputy.initialConditions.meanOrbitElements.eccentricity = 0.81111;
+plant.deputy.initialConditions.meanOrbitElements.inclination_rad = deg2rad(59.005);
 plant.deputy.initialConditions.meanOrbitElements.longitudeAscendingNode_rad = deg2rad(84);
 plant.deputy.initialConditions.meanOrbitElements.argumentPerigee_rad = deg2rad(188);
 plant.deputy.initialConditions.meanOrbitElements.MeanAnomaly_rad = deg2rad(180.1);

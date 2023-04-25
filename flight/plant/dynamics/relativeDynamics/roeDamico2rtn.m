@@ -13,6 +13,8 @@ LAN = OE(4);
 w = OE(5);
 nu = M2nu(OE(6),e);
 u = w + nu;
+ex = e*cos(w);
+ey = e*sin(w);
 
 k = 1 + e*cos(nu);
 kp = -e*sin(nu);

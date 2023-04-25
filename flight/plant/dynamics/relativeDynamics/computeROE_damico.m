@@ -6,16 +6,14 @@ e_c = oe_c(2);
 i_c = oe_c(3);
 Om_c = oe_c(4);
 w_c = oe_c(5);
-nu_c = oe_c(6);
-M_c = nu2m(nu_c);
+M_c = oe_c(6);
 
 a_d = oe_d(1);
 e_d = oe_d(2);
 i_d = oe_d(3);
 Om_d = oe_d(4);
 w_d = oe_d(5);
-nu_d = oe_d(6);
-M_d = nu2m(nu_d);
+M_d = oe_d(6);
 
 delta_a = (a_d - a_c) / a_c;
 delta_lambda = (M_d + w_d) - (M_c + w_c) + (Om_d - Om_c) * cos(i_c);

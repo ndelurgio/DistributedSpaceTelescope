@@ -62,7 +62,7 @@ clear r_ijk v_ijk
 % Initial Conditions
 plant.deputy.initialConditions.meanOrbitElements.semiMajorAxis_m = 7000e3;
 plant.deputy.initialConditions.meanOrbitElements.eccentricity = 0.0011;
-plant.deputy.initialConditions.meanOrbitElements.inclination_rad = deg2rad(59.001);
+plant.deputy.initialConditions.meanOrbitElements.inclination_rad = deg2rad(59.05);
 plant.deputy.initialConditions.meanOrbitElements.longitudeAscendingNode_rad = deg2rad(84);
 plant.deputy.initialConditions.meanOrbitElements.argumentPerigee_rad = deg2rad(188);
 plant.deputy.initialConditions.meanOrbitElements.MeanAnomaly_rad = deg2rad(180.1);
@@ -289,7 +289,7 @@ plant.chief.initialConditions.damicoROE.relativeInclinationY = -damicoROE(6);
 clear damicoROE
 %% Sim Config
 dt = 6;
-t_duration = 2*86400;
+t_duration = 15*2*pi*sqrt(plant.chief.initialConditions.meanOrbitElements.semiMajorAxis_m^3/plant.environment.earthProperties.gravitationalParameter_m3_s2);
 max_step_size = 60;
 relative_tolerance = 1e-11;
 

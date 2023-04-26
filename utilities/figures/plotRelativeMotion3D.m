@@ -17,6 +17,6 @@ view(30,30)
 hold on;
 % scatter3(telem.("relativeState")(perigee_idx,1),telem.("relativeState")(perigee_idx,2),telem.("relativeState")(perigee_idx,3),"MarkerFaceColor","g")
 % scatter3(telem.("relativeState")(apogee_idx,1),telem.("relativeState")(apogee_idx,2), telem.("relativeState")(apogee_idx,3),"MarkerFaceColor","r")
-legend(["Nonlinear","Linear"])
+legend(["Geometric","YA"])
 grid on;
 end

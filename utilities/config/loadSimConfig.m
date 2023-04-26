@@ -289,7 +289,7 @@ plant.chief.initialConditions.damicoROE.relativeInclinationY = -damicoROE(6);
 clear damicoROE
 %% Sim Config
 dt = 6;
-t_duration = 2*86400;
+t_duration = 15*2*pi*sqrt(plant.chief.initialConditions.meanOrbitElements.semiMajorAxis_m^3/plant.environment.earthProperties.gravitationalParameter_m3_s2);
 max_step_size = 60;
 relative_tolerance = 1e-11;
 

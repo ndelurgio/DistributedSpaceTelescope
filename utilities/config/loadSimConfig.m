@@ -16,8 +16,10 @@ plant.environment.sunProperties.gravitationalParameter_m3_s2 = 1.32712440042e20;
 
 %% Chief Properties
 % Initial Conditions
-plant.chief.initialConditions.meanOrbitElements.semiMajorAxis_m = 36943e3;
-plant.chief.initialConditions.meanOrbitElements.eccentricity = 0.8111;
+% plant.chief.initialConditions.meanOrbitElements.semiMajorAxis_m = 36943e3;
+% plant.chief.initialConditions.meanOrbitElements.eccentricity = 0.8111;
+plant.chief.initialConditions.meanOrbitElements.semiMajorAxis_m = 10000e3;
+plant.chief.initialConditions.meanOrbitElements.eccentricity = 0.3;
 plant.chief.initialConditions.meanOrbitElements.inclination_rad = deg2rad(59);
 plant.chief.initialConditions.meanOrbitElements.longitudeAscendingNode_rad = deg2rad(84);
 plant.chief.initialConditions.meanOrbitElements.argumentPerigee_rad = deg2rad(188);
@@ -60,9 +62,9 @@ clear r_ijk v_ijk
 
 %% Deputy Properties
 % Initial Conditions
-plant.deputy.initialConditions.meanOrbitElements.semiMajorAxis_m = 36943e3;
-plant.deputy.initialConditions.meanOrbitElements.eccentricity = 0.81111;
-plant.deputy.initialConditions.meanOrbitElements.inclination_rad = deg2rad(59.005);
+plant.deputy.initialConditions.meanOrbitElements.semiMajorAxis_m = 9999e3;
+plant.deputy.initialConditions.meanOrbitElements.eccentricity = 0.301;
+plant.deputy.initialConditions.meanOrbitElements.inclination_rad = deg2rad(59.1);
 plant.deputy.initialConditions.meanOrbitElements.longitudeAscendingNode_rad = deg2rad(84);
 plant.deputy.initialConditions.meanOrbitElements.argumentPerigee_rad = deg2rad(188);
 plant.deputy.initialConditions.meanOrbitElements.MeanAnomaly_rad = deg2rad(180.1);

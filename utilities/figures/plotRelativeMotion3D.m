@@ -6,8 +6,8 @@ function [] = plotRelativeMotion3D(telem)
 figure
 % title("Relative Motion in RTN Plane")
 hold on;
-plot3(telem.("Deputy Relative Cartesian State D'Amico ROE Map.positionX_RTN_m"),telem.("Deputy Relative Cartesian State D'Amico ROE Map.positionY_RTN_m"),telem.("Deputy Relative Cartesian State D'Amico ROE Map.positionZ_RTN_m"),Color="black",LineWidth=1.5)
-plot3(telem.("Deputy Relative Cartesian State RTN YA.positionX_RTN_m"),telem.("Deputy Relative Cartesian State RTN YA.positionY_RTN_m"),telem.("Deputy Relative Cartesian State RTN YA.positionZ_RTN_m"))
+plot3(telem.("Deputy Relative Cartesian State D'Amico ROE Map.positionX_RTN_m")(2:end),telem.("Deputy Relative Cartesian State D'Amico ROE Map.positionY_RTN_m")(2:end),telem.("Deputy Relative Cartesian State D'Amico ROE Map.positionZ_RTN_m")(2:end),Color="black",LineWidth=1.5)
+plot3(telem.("Deputy Relative Cartesian State RTN YA.positionX_RTN_m")(2:end),telem.("Deputy Relative Cartesian State RTN YA.positionY_RTN_m")(2:end),telem.("Deputy Relative Cartesian State RTN YA.positionZ_RTN_m")(2:end))
 
 axis equal;
 xlabel("\delta r_r [m]")

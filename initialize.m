@@ -20,7 +20,7 @@ sdi.Repository.clearRepositoryFile
 fprintf("Loading Configuration\n\n");
 
 % Load config
-loadSimConfig();
+nominalConfig();
 fprintf("\n\n");
 fprintf("----- Setup Complete ----- \n\n");
 fprintf("\n\n");

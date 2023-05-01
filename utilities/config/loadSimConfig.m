@@ -22,6 +22,14 @@ plant.chief.initialConditions.meanOrbitElements.longitudeAscendingNode_rad = chi
 plant.chief.initialConditions.meanOrbitElements.argumentPerigee_rad = chiefOE(5);
 plant.chief.initialConditions.meanOrbitElements.MeanAnomaly_rad = chiefOE(6);
 
+chiefOEqns = singular2quasiOE(chiefOE);
+plant.chief.initialConditions.meanOrbitElementsQNS.semiMajorAxis_m = chiefOEqns(1);
+plant.chief.initialConditions.meanOrbitElementsQNS.meanArgumentLatitude_rad = chiefOEqns(2);
+plant.chief.initialConditions.meanOrbitElementsQNS.eccentricityX = chiefOEqns(3);
+plant.chief.initialConditions.meanOrbitElementsQNS.eccentricityY = chiefOEqns(4);
+plant.chief.initialConditions.meanOrbitElementsQNS.inclination_rad = chiefOEqns(5);
+plant.chief.initialConditions.meanOrbitElementsQNS.longitudeAscendingNode_rad = chiefOEqns(6);
+
 osc_oe = mean2osc([ ...
     plant.chief.initialConditions.meanOrbitElements.semiMajorAxis_m, ...
     plant.chief.initialConditions.meanOrbitElements.eccentricity, ...
@@ -37,6 +45,14 @@ plant.chief.initialConditions.osculatingOrbitElements.inclination_rad = osc_oe(3
 plant.chief.initialConditions.osculatingOrbitElements.longitudeAscendingNode_rad = osc_oe(4);
 plant.chief.initialConditions.osculatingOrbitElements.argumentPerigee_rad = osc_oe(5);
 plant.chief.initialConditions.osculatingOrbitElements.MeanAnomaly_rad = osc_oe(6);
+
+chiefOEqns = singular2quasiOE(osc_oe);
+plant.chief.initialConditions.osculatingOrbitElementsQNS.semiMajorAxis_m = chiefOEqns(1);
+plant.chief.initialConditions.osculatingOrbitElementsQNS.meanArgumentLatitude_rad = chiefOEqns(2);
+plant.chief.initialConditions.osculatingOrbitElementsQNS.eccentricityX = chiefOEqns(3);
+plant.chief.initialConditions.osculatingOrbitElementsQNS.eccentricityY = chiefOEqns(4);
+plant.chief.initialConditions.osculatingOrbitElementsQNS.inclination_rad = chiefOEqns(5);
+plant.chief.initialConditions.osculatingOrbitElementsQNS.longitudeAscendingNode_rad = chiefOEqns(6);
 
 [r_ijk,v_ijk] = oe2eci(...
     plant.chief.initialConditions.osculatingOrbitElements.semiMajorAxis_m,...
@@ -66,6 +82,14 @@ plant.deputy.initialConditions.meanOrbitElements.longitudeAscendingNode_rad = de
 plant.deputy.initialConditions.meanOrbitElements.argumentPerigee_rad = deputyOE(5);
 plant.deputy.initialConditions.meanOrbitElements.MeanAnomaly_rad = deputyOE(6);
 
+deputyOEqns = singular2quasiOE(deputyOE);
+plant.deputy.initialConditions.meanOrbitElementsQNS.semiMajorAxis_m = deputyOEqns(1);
+plant.deputy.initialConditions.meanOrbitElementsQNS.meanArgumentLatitude_rad = deputyOEqns(2);
+plant.deputy.initialConditions.meanOrbitElementsQNS.eccentricityX = deputyOEqns(3);
+plant.deputy.initialConditions.meanOrbitElementsQNS.eccentricityY = deputyOEqns(4);
+plant.deputy.initialConditions.meanOrbitElementsQNS.inclination_rad = deputyOEqns(5);
+plant.deputy.initialConditions.meanOrbitElementsQNS.longitudeAscendingNode_rad = deputyOEqns(6);
+
 osc_oe = mean2osc([ ...
     plant.deputy.initialConditions.meanOrbitElements.semiMajorAxis_m, ...
     plant.deputy.initialConditions.meanOrbitElements.eccentricity, ...
@@ -92,6 +116,14 @@ plant.deputy.initialConditions.osculatingOrbitElements.inclination_rad = osc_oe(
 plant.deputy.initialConditions.osculatingOrbitElements.longitudeAscendingNode_rad = osc_oe(4);
 plant.deputy.initialConditions.osculatingOrbitElements.argumentPerigee_rad = osc_oe(5);
 plant.deputy.initialConditions.osculatingOrbitElements.MeanAnomaly_rad = osc_oe(6);
+
+deputyOEqns = singular2quasiOE(osc_oe);
+plant.deputy.initialConditions.osculatingOrbitElementsQNS.semiMajorAxis_m = deputyOEqns(1);
+plant.deputy.initialConditions.osculatingOrbitElementsQNS.meanArgumentLatitude_rad = deputyOEqns(2);
+plant.deputy.initialConditions.osculatingOrbitElementsQNS.eccentricityX = deputyOEqns(3);
+plant.deputy.initialConditions.osculatingOrbitElementsQNS.eccentricityY = deputyOEqns(4);
+plant.deputy.initialConditions.osculatingOrbitElementsQNS.inclination_rad = deputyOEqns(5);
+plant.deputy.initialConditions.osculatingOrbitElementsQNS.longitudeAscendingNode_rad = deputyOEqns(6);
 
 [r_ijk,v_ijk] = oe2eci(...
     plant.deputy.initialConditions.osculatingOrbitElements.semiMajorAxis_m,...
@@ -304,7 +336,9 @@ plantBus            = addToBus(plantBus,"environment","bus");
 % Chief
 chief               = createBus(plant.chief);
 meanOrbitElements   = createBus(plant.chief.initialConditions.meanOrbitElements);
+meanOrbitElementsQNS = createBus(plant.chief.initialConditions.meanOrbitElementsQNS);
 osculatingOrbitElements   = createBus(plant.chief.initialConditions.osculatingOrbitElements);
+osculatingOrbitElementsQNS   = createBus(plant.chief.initialConditions.osculatingOrbitElementsQNS);
 cartesianState      = createBus(plant.chief.initialConditions.cartesianState);
 relativeCartesianState = createBus(plant.chief.initialConditions.relativeCartesianState);
 orbitElementDifferences = createBus(plant.chief.initialConditions.orbitElementDifferences);
@@ -316,7 +350,9 @@ damicoROE = createBus(plant.chief.initialConditions.damicoROE);
 
 initialConditions   = createBus(plant.chief.initialConditions);
 initialConditions   = addToBus(initialConditions,"meanOrbitElements","bus");
+initialConditions   = addToBus(initialConditions,"meanOrbitElementsQNS","bus");
 initialConditions   = addToBus(initialConditions,"osculatingOrbitElements","bus");
+initialConditions   = addToBus(initialConditions,"osculatingOrbitElementsQNS","bus");
 initialConditions   = addToBus(initialConditions,"cartesianState","bus");
 initialConditions   = addToBus(initialConditions, "relativeCartesianState", "bus");
 initialConditions   = addToBus(initialConditions,"orbitElementDifferences","bus");

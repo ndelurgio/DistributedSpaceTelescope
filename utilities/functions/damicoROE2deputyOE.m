@@ -1,11 +1,12 @@
 function deputyOE = damicoROE2deputyOE(ROE,chiefOE)
 
 a = chiefOE(1);
-ex = chiefOE(2);
-ey = chiefOE(3);
-i = chiefOE(4);
-O = chiefOE(5);
-u = chiefOE(6);
+u = chiefOE(2);
+ex = chiefOE(3);
+ey = chiefOE(4);
+i = chiefOE(5);
+O = chiefOE(6);
+
 
 da = ROE(1);
 dlam = ROE(2);
@@ -18,10 +19,10 @@ ad = a*da + a;
 edx = dex + ex;
 edy = dey + ey;
 id = dix + i;
-Od = diy/sin(i) + O;
-ud = dlam + u -(Od-O)*cos(i);
+Od = wrapTo2Pi(diy/sin(i) + O);
+ud = wrapTo2Pi(dlam + u -(Od-O)*cos(i));
 
-deputyOE = [ad,edx,edy,id,Od,ud];
+deputyOE = [ad,ud,edx,edy,id,Od];
 
 end
 

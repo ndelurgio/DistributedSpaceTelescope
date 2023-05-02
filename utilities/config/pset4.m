@@ -6,6 +6,6 @@ chiefOEqns = singular2quasiOE(chiefOE);
 deputyOEqns = damicoROE2deputyOE(aROE/chiefOE(1), chiefOEqns);
 
 deputyOE = quasi2singularOE(deputyOEqns);
-J2_flag = 1;
+J2_flag = 0;
 
 loadSimConfig;

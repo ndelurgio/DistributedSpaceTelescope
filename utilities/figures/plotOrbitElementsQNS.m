@@ -4,8 +4,8 @@ set(gcf,'position',[300,300,800,800])
 subplot(3,2,1)
 hold on;
 title("Semi-Major Axis vs Time")
-plot(time/3600,telem.("Osculating quasi non-singular chief OE.relativeSemiMajorAxis_m")/1000,"LineWidth",1)
-plot(time/3600,telem.("PerturbedOrbitElements")(:,1)/1000,"LineWidth",1)
+plot(time/3600,telem.("Osculating quasi non-singular chief OE.semiMajorAxis_m")/1000,"LineWidth",1)
+plot(time/3600,telem.("Mean quasi non-singular chief OE.semiMajorAxis_m")/1000,"LineWidth",1)
 legend("Osculating","Mean")
 xlabel("t [hr]")
 ylabel("a [km]")
@@ -13,50 +13,50 @@ grid on;
 
 subplot(3,2,2)
 hold on;
-title("Eccentricity vs Time")
-plot(time/3600,telem.("KeplerOrbitElements")(:,2),"LineWidth",1)
-plot(time/3600,telem.("PerturbedOrbitElements")(:,2),"LineWidth",1)
+title("Mean Argument of Latitude vs Time")
+plot(time/3600,deg2rad(telem.("Osculating quasi non-singular chief OE.meanArgumentLatitude_rad")),"LineWidth",1)
+plot(time/3600,deg2rad(telem.("Mean quasi non-singular chief OE.meanArgumentLatitude_rad")),"LineWidth",1)
 legend("Osculating","Mean")
 xlabel("t [hr]")
-ylabel("e")
+ylabel("u [deg]")
 grid on;
 
 subplot(3,2,3)
 hold on;
+title("X Eccentricity vs Time")
+plot(time/3600,telem.("Osculating quasi non-singular chief OE.eccentricityX"),"LineWidth",1)
+plot(time/3600,telem.("Mean quasi non-singular chief OE.eccentricityX"),"LineWidth",1)
+legend("Osculating","Mean")
+xlabel("t [hr]")
+ylabel("e_x")
+grid on;
+
+subplot(3,2,4)
+hold on;
+title("Y Eccentricity vs Time")
+plot(time/3600,telem.("Osculating quasi non-singular chief OE.eccentricityY"),"LineWidth",1)
+plot(time/3600,telem.("Mean quasi non-singular chief OE.eccentricityY"),"LineWidth",1)
+legend("Osculating","Mean")
+xlabel("t [hr]")
+ylabel("e_y")
+grid on;
+
+subplot(3,2,5)
+hold on;
 title("Inclination vs Time")
-plot(time/3600,telem.("KeplerOrbitElements")(:,3)*180/pi,"LineWidth",1)
-plot(time/3600,telem.("PerturbedOrbitElements")(:,3)*180/pi,"LineWidth",1)
+plot(time/3600,deg2rad(telem.("Osculating quasi non-singular chief OE.inclination_rad")),"LineWidth",1)
+plot(time/3600,deg2rad(telem.("Mean quasi non-singular chief OE.inclination_rad")),"LineWidth",1)
 legend("Osculating","Mean")
 xlabel("t [hr]")
 ylabel("i [deg]")
 grid on;
 
-subplot(3,2,4)
+subplot(3,2,6)
 hold on;
-title("Longitude of Ascending Node vs Time")
-plot(time/3600,telem.("KeplerOrbitElements")(:,4)*180/pi,"LineWidth",1)
-plot(time/3600,telem.("PerturbedOrbitElements")(:,4)*180/pi,"LineWidth",1)
+title("Longitude Ascending Node vs Time")
+plot(time/3600,deg2rad(telem.("Osculating quasi non-singular chief OE.longitudeAscendingNode_r")),"LineWidth",1)
+plot(time/3600,deg2rad(telem.("Mean quasi non-singular chief OE.longitudeAscendingNode_rad")),"LineWidth",1)
 legend("Osculating","Mean")
 xlabel("t [hr]")
 ylabel("\Omega [deg]")
-grid on;
-
-subplot(3,2,5)
-hold on;
-title("Argument of Perigee vs Time")
-plot(time/3600,telem.("KeplerOrbitElements")(:,5)*180/pi,"LineWidth",1)
-plot(time/3600,telem.("PerturbedOrbitElements")(:,5)*180/pi,"LineWidth",1)
-legend("Osculating","Mean")
-xlabel("t [hr]")
-ylabel("\omega [deg]")
-grid on;
-
-subplot(3,2,6)
-hold on;
-title("True Anomaly vs Time")
-plot(time/3600,telem.("KeplerOrbitElements")(:,6)*180/pi,"LineWidth",1)
-plot(time/3600,telem.("PerturbedOrbitElements")(:,6)*180/pi,"LineWidth",1)
-legend("Osculating","Mean")
-xlabel("t [hr]")
-ylabel("\nu [deg]")
 grid on;

@@ -12,7 +12,7 @@ axis equal
 hold on;
 plot3(telem.("Deputy Relative Cartesian State RTN Nonlinear.positionX_RTN_m")(2:end),telem.("Deputy Relative Cartesian State RTN Nonlinear.positionY_RTN_m")(2:end),telem.("Deputy Relative Cartesian State RTN Nonlinear.positionZ_RTN_m")(2:end),LineWidth=1.5)
 % plot3(telem.("Deputy Relative Cartesian State D'Amico ROE Map.positionX_RTN_m")(2:end),telem.("Deputy Relative Cartesian State D'Amico ROE Map.positionY_RTN_m")(2:end),telem.("Deputy Relative Cartesian State D'Amico ROE Map.positionZ_RTN_m")(2:end),LineWidth=1.5)
-plot3(telem.("Deputy Relative Cartesian State RTN YA.positionX_RTN_m")(2:end),telem.("Deputy Relative Cartesian State RTN YA.positionY_RTN_m")(2:end),telem.("Deputy Relative Cartesian State RTN YA.positionZ_RTN_m")(2:end),LineWidth=1.5)
+% plot3(telem.("Deputy Relative Cartesian State RTN YA.positionX_RTN_m")(2:end),telem.("Deputy Relative Cartesian State RTN YA.positionY_RTN_m")(2:end),telem.("Deputy Relative Cartesian State RTN YA.positionZ_RTN_m")(2:end),LineWidth=1.5)
 % plot3(telem.("Deputy Relative Cartesian State RTN Nonlinear.positionX_RTN_m")(2:end),telem.("Deputy Relative Cartesian State RTN Nonlinear.positionY_RTN_m")(2:end),telem.("Deputy Relative Cartesian State RTN Nonlinear.positionZ_RTN_m")(2:end),LineWidth=1.5)
 % plot3(telem.("Deputy Relative Cartesian State RTN HCW.positionX_RTN_m")(2:end),telem.("Deputy Relative Cartesian State RTN HCW.positionY_RTN_m")(2:end),telem.("Deputy Relative Cartesian State RTN HCW.positionZ_RTN_m")(2:end),LineWidth=1.5)
 
@@ -22,7 +22,7 @@ ylabel("\delta r_t [m]")
 zlabel("\delta r_n [m]")
 view(30,30)
 % legend(["Nonlinear","Geometric","YA"])
-legend(["Nonlinear","YA"])
+% legend(["Nonlinear","YA"])
 % legend(["Nonlinear","HCW"])
 grid on;
 subplot(1,2,2)

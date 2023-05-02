@@ -7,7 +7,7 @@ axis equal
 grid on
 hold on;
 title("Relative Position in T-R Plane")
-plot(telem.("Deputy Relative Cartesian State RTN Nonlinear.positionY_RTN_m"),telem.("Deputy Relative Cartesian State RTN Nonlinear.positionX_RTN_m"),Color="black",LineWidth=3)
+plot(telem.("Deputy Relative Cartesian State RTN Nonlinear.positionY_RTN_m"),telem.("Deputy Relative Cartesian State RTN Nonlinear.positionX_RTN_m"),LineWidth=1)
 xlabel("T [m]")
 ylabel("R [m]")
 
@@ -17,7 +17,7 @@ axis equal
 grid on
 hold on;
 title("Relative Position in N-R Plane")
-plot(telem.("Deputy Relative Cartesian State RTN Nonlinear.positionZ_RTN_m"),telem.("Deputy Relative Cartesian State RTN Nonlinear.positionX_RTN_m"),Color="black",LineWidth=3)
+plot(telem.("Deputy Relative Cartesian State RTN Nonlinear.positionZ_RTN_m"),telem.("Deputy Relative Cartesian State RTN Nonlinear.positionX_RTN_m"),LineWidth=1)
 xlabel("N [m]")
 ylabel("R [m]")
 
@@ -26,7 +26,7 @@ axis equal
 grid on
 hold on;
 title("Relative Position in T-N Plane")
-plot(telem.("Deputy Relative Cartesian State RTN Nonlinear.positionY_RTN_m"),telem.("Deputy Relative Cartesian State RTN Nonlinear.positionZ_RTN_m"),Color="black",LineWidth=3)
+plot(telem.("Deputy Relative Cartesian State RTN Nonlinear.positionY_RTN_m"),telem.("Deputy Relative Cartesian State RTN Nonlinear.positionZ_RTN_m"),LineWidth=1)
 xlabel("T [m]")
 ylabel("N [m]")
 switch linearModel
@@ -70,6 +70,7 @@ switch linearModel
         subplot(3, 1, 3)
         plot(telem.("Relative State RTN Guffanti QNS.positionY_RTN_m"),telem.("Relative State RTN Guffanti QNS.positionZ_RTN_m"),LineStyle="--",LineWidth=3)
         legend(["Nonlinear","Linear"])
+
 end
 
 figure

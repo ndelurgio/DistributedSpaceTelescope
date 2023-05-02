@@ -1,11 +1,11 @@
-function STM = computeCircularROE_J2_STM(OE,J2,earthRadius,mu,t)
+function STM = computeCircularROE_J2_STM(OE0,J2,earthRadius,mu,t)
 
-a = OE(1);
-e = OE(2);
-i = OE(3);
-O = OE(4);
-w = OE(5);
-M = OE(6);
+a = OE0(1);
+e = OE0(2);
+i = OE0(3);
+Om_i = OE0(4);
+w_i = OE0(5);
+M_i = OE0(6);
 
 n = meanMotion(mu,a);
 eta = sqrt(1-e^2);
@@ -24,10 +24,10 @@ V = tan(i/2);
 W = cos(i/2)^2;
 
 w_dot = k * Q;
-w_i = plant.chief.initialConditions.osculatingOrbitElements(5);
+% w_i = plant.chief.initialConditions.osculatingOrbitElements(5);
 w_f = w_i + w_dot*t;
 Om_dot = -2*k*R;
-Om_i = plant.chief.initialConditions.osculatingOrbitElements(4);
+% Om_i = plant.chief.initialConditions.osculatingOrbitElements(4);
 Om_f = Om_i + Om_dot*t;
 
 e_xi = e * cos(w_i);

@@ -18,6 +18,7 @@ plant.environment.sunProperties.radius_m = 696340e3;
 plant.environment.sunProperties.gravitationalParameter_m3_s2 = 1.32712440042e20;
 [plant.environment.sunProperties.position, plant.environment.sunProperties.time] = generateSunEphemeris(t_epoch,t_final,60);
 plant.environment.sunProperties.solarPressure_N_m2 = 4.5344321e-6;
+plant.environment.sunProperties.srp_flag = srp_flag;
 
 plant.environment.constants.AU_m = 1.496e11;
 

@@ -2,6 +2,10 @@
 plantBus = Simulink.Bus;
 plant = struct();
 
+%% Sim Config
+dt = 6;
+t_duration = seconds(t_final - t_epoch);
+
 %% Environment
 % Earth Properties 
 plant.environment.earthProperties.radius_m = 6.378e6;
@@ -12,6 +16,7 @@ plant.environment.earthProperties.J2_flag = J2_flag;
 % Sun Properties
 plant.environment.sunProperties.radius_m = 696340e3;
 plant.environment.sunProperties.gravitationalParameter_m3_s2 = 1.32712440042e20;
+[plant.environment.sunProperties.position, plant.environment.sunProperties.time] = generateSunEphemeris(t_epoch,t_final,60);
 
 %% Chief Properties
 % Initial Conditions
@@ -29,6 +34,7 @@ plant.chief.initialConditions.meanOrbitElementsQNS.eccentricityX = chiefOEqns(3)
 plant.chief.initialConditions.meanOrbitElementsQNS.eccentricityY = chiefOEqns(4);
 plant.chief.initialConditions.meanOrbitElementsQNS.inclination_rad = chiefOEqns(5);
 plant.chief.initialConditions.meanOrbitElementsQNS.longitudeAscendingNode_rad = chiefOEqns(6);
+clear chiefOEqns
 
 osc_oe = mean2osc([ ...
     plant.chief.initialConditions.meanOrbitElements.semiMajorAxis_m, ...
@@ -99,17 +105,6 @@ osc_oe = mean2osc([ ...
     plant.deputy.initialConditions.meanOrbitElements.MeanAnomaly_rad...
     ],plant.environment.earthProperties.J2_flag);
 
-% osc_oe = osc_oe + [0.0, 0.000001, deg2rad(0.01), 0.0, 0.0, 0.0];
-% 
-% mean_oe = osc2mean(osc_oe,1);
-
-% plant.deputy.initialConditions.meanOrbitElements.semiMajorAxis_m = mean_oe(1);
-% plant.deputy.initialConditions.meanOrbitElements.eccentricity = mean_oe(2);
-% plant.deputy.initialConditions.meanOrbitElements.inclination_rad = mean_oe(3);
-% plant.deputy.initialConditions.meanOrbitElements.longitudeAscendingNode_rad = mean_oe(4);
-% plant.deputy.initialConditions.meanOrbitElements.argumentPerigee_rad = mean_oe(5);
-% plant.deputy.initialConditions.meanOrbitElements.MeanAnomaly_rad = mean_oe(6);
-
 plant.deputy.initialConditions.osculatingOrbitElements.semiMajorAxis_m = osc_oe(1);
 plant.deputy.initialConditions.osculatingOrbitElements.eccentricity = osc_oe(2);
 plant.deputy.initialConditions.osculatingOrbitElements.inclination_rad = osc_oe(3);
@@ -124,6 +119,7 @@ plant.deputy.initialConditions.osculatingOrbitElementsQNS.eccentricityX = deputy
 plant.deputy.initialConditions.osculatingOrbitElementsQNS.eccentricityY = deputyOEqns(4);
 plant.deputy.initialConditions.osculatingOrbitElementsQNS.inclination_rad = deputyOEqns(5);
 plant.deputy.initialConditions.osculatingOrbitElementsQNS.longitudeAscendingNode_rad = deputyOEqns(6);
+clear deputyOEqns
 
 [r_ijk,v_ijk] = oe2eci(...
     plant.deputy.initialConditions.osculatingOrbitElements.semiMajorAxis_m,...
@@ -318,11 +314,6 @@ plant.chief.initialConditions.damicoROE.relativeInclinationX = -damicoROE(5);
 plant.chief.initialConditions.damicoROE.relativeInclinationY = -damicoROE(6);
 
 clear damicoROE
-%% Sim Config
-dt = 6;
-t_duration = 15*2*pi*sqrt(plant.chief.initialConditions.meanOrbitElements.semiMajorAxis_m^3/plant.environment.earthProperties.gravitationalParameter_m3_s2);
-max_step_size = 60;
-relative_tolerance = 1e-11;
 
 %% Generate Plant Bus
 % Environment

@@ -17,9 +17,19 @@ plant.environment.earthProperties.J2_flag = J2_flag;
 plant.environment.sunProperties.radius_m = 696340e3;
 plant.environment.sunProperties.gravitationalParameter_m3_s2 = 1.32712440042e20;
 [plant.environment.sunProperties.position, plant.environment.sunProperties.time] = generateSunEphemeris(t_epoch,t_final,60);
+plant.environment.sunProperties.solarPressure_N_m2 = 4.5344321e-6;
+
+plant.environment.constants.AU_m = 1.496e11;
 
 %% Chief Properties
+% Physical Properties
+plant.chief.properties.SRPcoefficient = 1.29;
+plant.chief.properties.area_m2 = 3.34;
+plant.chief.properties.dryMass_kg = 327;
+
 % Initial Conditions
+plant.chief.initialConditions.mass_kg = 339;
+
 plant.chief.initialConditions.meanOrbitElements.semiMajorAxis_m = chiefOE(1);
 plant.chief.initialConditions.meanOrbitElements.eccentricity = chiefOE(2);
 plant.chief.initialConditions.meanOrbitElements.inclination_rad = chiefOE(3);
@@ -80,7 +90,14 @@ theta0_dot = computeTheta0_dot(norm(r_ijk),plant.environment.earthProperties.gra
 clear r_ijk v_ijk
 
 %% Deputy Properties
+% Physical Properties
+plant.deputy.properties.SRPcoefficient = 1.90;
+plant.deputy.properties.area_m2 = 1.77;
+plant.deputy.properties.dryMass_kg = 190;
+
 % Initial Conditions
+plant.deputy.initialConditions.mass_kg = 211;
+
 plant.deputy.initialConditions.meanOrbitElements.semiMajorAxis_m = deputyOE(1);
 plant.deputy.initialConditions.meanOrbitElements.eccentricity = deputyOE(2);
 plant.deputy.initialConditions.meanOrbitElements.inclination_rad = deputyOE(3);
@@ -318,14 +335,17 @@ clear damicoROE
 %% Generate Plant Bus
 % Environment
 environment         = createBus(plant.environment);
+constants           = createBus(plant.environment.constants);
 earthProperties     = createBus(plant.environment.earthProperties);
 sunProperties       = createBus(plant.environment.sunProperties);
+environment         = addToBus(environment,"constants","bus");
 environment         = addToBus(environment,"earthProperties","bus");
 environment         = addToBus(environment,"sunProperties","bus");
 plantBus            = addToBus(plantBus,"environment","bus");
 
 % Chief
 chief               = createBus(plant.chief);
+properties          = createBus(plant.chief.properties);
 meanOrbitElements   = createBus(plant.chief.initialConditions.meanOrbitElements);
 meanOrbitElementsQNS = createBus(plant.chief.initialConditions.meanOrbitElementsQNS);
 osculatingOrbitElements   = createBus(plant.chief.initialConditions.osculatingOrbitElements);
@@ -352,10 +372,13 @@ initialConditions   = addToBus(initialConditions,"integrationConstants_YA","bus"
 initialConditions   = addToBus(initialConditions,"eccentricSingularROE","bus");
 initialConditions   = addToBus(initialConditions,"eccentricQuasiNonsingularROE","bus");
 initialConditions   = addToBus(initialConditions,"damicoROE","bus");
+
+chief               = addToBus(chief,"properties","bus");
 chief               = addToBus(chief,"initialConditions","bus");
 plantBus = addToBus(plantBus,"chief","bus");
 
 % Deputy
 deputy              = createBus(plant.chief);
+deputy              = addToBus(deputy, "properties","bus");
 deputy              = addToBus(deputy,"initialConditions","bus");
 plantBus = addToBus(plantBus,"deputy","bus");

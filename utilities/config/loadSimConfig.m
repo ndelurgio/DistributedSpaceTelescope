@@ -27,6 +27,9 @@ plant.environment.constants.AU_m = 1.496e11;
 plant.chief.properties.SRPcoefficient = 1.29;
 plant.chief.properties.area_m2 = 3.34;
 plant.chief.properties.dryMass_kg = 327;
+plant.chief.properties.actuators.thruster.thrust_N = 2.1;
+plant.chief.properties.actuators.thruster.isp_s = 235;
+
 
 % Initial Conditions
 plant.chief.initialConditions.mass_kg = 339;
@@ -95,6 +98,8 @@ clear r_ijk v_ijk
 plant.deputy.properties.SRPcoefficient = 1.90;
 plant.deputy.properties.area_m2 = 1.77;
 plant.deputy.properties.dryMass_kg = 190;
+plant.deputy.properties.actuators.thruster.thrust_N = 0.0143;
+plant.deputy.properties.actuators.thruster.isp_s = 68;
 
 % Initial Conditions
 plant.deputy.initialConditions.mass_kg = 211;
@@ -346,7 +351,13 @@ plantBus            = addToBus(plantBus,"environment","bus");
 
 % Chief
 chief               = createBus(plant.chief);
+actuators           = createBus(plant.chief.properties.actuators);
+thruster            = createBus(plant.chief.properties.actuators.thruster);
+actuators           = addToBus(actuators,"thruster","bus");
 properties          = createBus(plant.chief.properties);
+properties          = addToBus(properties,"actuators","bus");
+
+
 meanOrbitElements   = createBus(plant.chief.initialConditions.meanOrbitElements);
 meanOrbitElementsQNS = createBus(plant.chief.initialConditions.meanOrbitElementsQNS);
 osculatingOrbitElements   = createBus(plant.chief.initialConditions.osculatingOrbitElements);

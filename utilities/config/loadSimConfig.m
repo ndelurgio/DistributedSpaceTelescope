@@ -12,9 +12,18 @@ plant.environment.earthProperties.J2_flag = J2_flag;
 % Sun Properties
 plant.environment.sunProperties.radius_m = 696340e3;
 plant.environment.sunProperties.gravitationalParameter_m3_s2 = 1.32712440042e20;
+plant.environment.sunProperties.solarPressure_N_m2 = 4.5344321e-6;
+plant.environment.sunProperties.sunPosition = 0;
 
 %% Chief Properties
+% Physical Properties
+plant.chief.properties.SRPcoefficient = 1.29;
+plant.chief.properties.area_m2 = 3.34;
+plant.chief.properties.dryMass_kg = 327;
+
 % Initial Conditions
+plant.chief.initialConditions.mass_kg = 339;
+
 plant.chief.initialConditions.meanOrbitElements.semiMajorAxis_m = chiefOE(1);
 plant.chief.initialConditions.meanOrbitElements.eccentricity = chiefOE(2);
 plant.chief.initialConditions.meanOrbitElements.inclination_rad = chiefOE(3);
@@ -74,7 +83,14 @@ theta0_dot = computeTheta0_dot(norm(r_ijk),plant.environment.earthProperties.gra
 clear r_ijk v_ijk
 
 %% Deputy Properties
+% Physical Properties
+plant.deputy.properties.SRPcoefficient = 1.90;
+plant.deputy.properties.area_m2 = 1.77;
+plant.deputy.properties.dryMass_kg = 190;
+
 % Initial Conditions
+plant.deputy.initialConditions.mass_kg = 211;
+
 plant.deputy.initialConditions.meanOrbitElements.semiMajorAxis_m = deputyOE(1);
 plant.deputy.initialConditions.meanOrbitElements.eccentricity = deputyOE(2);
 plant.deputy.initialConditions.meanOrbitElements.inclination_rad = deputyOE(3);

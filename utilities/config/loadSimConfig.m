@@ -1,10 +1,18 @@
 %% Init Bus & Struct
 plantBus = Simulink.Bus;
 plant = struct();
+gncBus = Simulink.Bus;
+gnc = struct();
 
 %% Sim Config
 dt = 6;
 t_duration = seconds(t_final - t_epoch);
+
+%% GNC
+gnc.modes.science = [170, 190];
+gnc.modes.formationBreak = [190, 192.2];
+gnc.modes.passive = [192.2, 163.6];
+gnc.modes.formationAcquisition = [163.6, 170];
 
 %% Environment
 % Earth Properties 
@@ -334,6 +342,10 @@ plant.chief.initialConditions.damicoROE.relativeInclinationY = -damicoROE(6);
 clear damicoROE
 
 %% Generate Plant Bus
+modes               = createBus(gnc.modes);
+gncBus              = addToBus(gncBus, "modes", "bus");
+
+%% Generate Plant Bus
 % Environment
 environment         = createBus(plant.environment);
 constants           = createBus(plant.environment.constants);
@@ -376,10 +388,10 @@ initialConditions   = addToBus(initialConditions,"damicoROE","bus");
 
 chief               = addToBus(chief,"properties","bus");
 chief               = addToBus(chief,"initialConditions","bus");
-plantBus = addToBus(plantBus,"chief","bus");
+plantBus            = addToBus(plantBus,"chief","bus");
 
 % Deputy
 deputy              = createBus(plant.chief);
 deputy              = addToBus(deputy, "properties","bus");
 deputy              = addToBus(deputy,"initialConditions","bus");
-plantBus = addToBus(plantBus,"deputy","bus");
+plantBus            = addToBus(plantBus,"deputy","bus");

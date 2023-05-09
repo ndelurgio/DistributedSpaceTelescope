@@ -8,29 +8,23 @@ w = chiefOE(5);
 M = chiefOE(6);
 
 eta = sqrt(1-e^2);
-b = [1;
+b = [eta^2;
     M/eta + eta^2*(w+O*cos(i));
     e*cos(w) + e*sin(w)*M/eta;
     e*sin(w) - e*cos(w)*M/eta;
     eta^2*i;
     eta^2*O*sin(i)];
 
+b = ROE + b;
+A = [
+    eta^2/a, 0, 0, 0, 0, 0;
+    0, 0, 0, eta^2*cos(i), eta^2, 1/eta;
+    0, cos(w), 0, 0, 0, e*sin(w)/eta;
+    0, sin(w), 0, 0, 0, -e*cos(w)/eta;
+    0, 0, eta^2, 0, 0, 0;
+    0, 0, 0, eta^2*sin(i), 0, 0
+];
 
-da = ROE(1);
-dlam = ROE(2);
-dex = ROE(3);
-dey = ROE(4);
-dix = ROE(5);
-diy = ROE(6);
-
-ad = a*da + a;
-edx = dex + ex;
-edy = dey + ey;
-id = dix + i;
-Od = wrapTo2Pi(diy/sin(i) + O);
-ud = wrapTo2Pi(dlam + u -(Od-O)*cos(i));
-
-deputyOE = [ad,ud,edx,edy,id,Od];
-
+deputyOE = inv(A)*b;
 end
 

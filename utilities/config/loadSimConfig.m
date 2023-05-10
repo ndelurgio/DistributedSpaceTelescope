@@ -1,10 +1,18 @@
 %% Init Bus & Struct
 plantBus = Simulink.Bus;
 plant = struct();
+gncBus = Simulink.Bus;
+gnc = struct();
 
 %% Sim Config
 dt = 6;
 t_duration = seconds(t_final - t_epoch);
+
+%% GNC
+gnc.modes.science = [170, 190];
+gnc.modes.formationBreak = [190, 192.2];
+gnc.modes.passive = [192.2, 163.6];
+gnc.modes.formationAcquisition = [163.6, 170];
 
 %% Environment
 % Earth Properties 
@@ -27,8 +35,8 @@ plant.environment.constants.AU_m = 1.496e11;
 plant.chief.properties.SRPcoefficient = 1.29;
 plant.chief.properties.area_m2 = 3.34;
 plant.chief.properties.dryMass_kg = 327;
-plant.chief.properties.actuators.thruster.thrust_N = 2.1;
-plant.chief.properties.actuators.thruster.isp_s = 235;
+plant.chief.properties.actuators.thruster.thrust_N = 0.0143;
+plant.chief.properties.actuators.thruster.isp_s = 68;
 
 
 % Initial Conditions
@@ -98,8 +106,8 @@ clear r_ijk v_ijk
 plant.deputy.properties.SRPcoefficient = 1.90;
 plant.deputy.properties.area_m2 = 1.77;
 plant.deputy.properties.dryMass_kg = 190;
-plant.deputy.properties.actuators.thruster.thrust_N = 0.0143;
-plant.deputy.properties.actuators.thruster.isp_s = 68;
+plant.deputy.properties.actuators.thruster.thrust_N = 2.1;
+plant.deputy.properties.actuators.thruster.isp_s = 235;
 
 % Initial Conditions
 plant.deputy.initialConditions.mass_kg = 211;
@@ -339,6 +347,10 @@ plant.chief.initialConditions.damicoROE.relativeInclinationY = -damicoROE(6);
 clear damicoROE
 
 %% Generate Plant Bus
+modes               = createBus(gnc.modes);
+gncBus              = addToBus(gncBus, "modes", "bus");
+
+%% Generate Plant Bus
 % Environment
 environment         = createBus(plant.environment);
 constants           = createBus(plant.environment.constants);
@@ -387,10 +399,10 @@ initialConditions   = addToBus(initialConditions,"damicoROE","bus");
 
 chief               = addToBus(chief,"properties","bus");
 chief               = addToBus(chief,"initialConditions","bus");
-plantBus = addToBus(plantBus,"chief","bus");
+plantBus            = addToBus(plantBus,"chief","bus");
 
 % Deputy
 deputy              = createBus(plant.chief);
 deputy              = addToBus(deputy, "properties","bus");
 deputy              = addToBus(deputy,"initialConditions","bus");
-plantBus = addToBus(plantBus,"deputy","bus");
+plantBus            = addToBus(plantBus,"deputy","bus");

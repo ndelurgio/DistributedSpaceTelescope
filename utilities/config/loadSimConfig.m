@@ -5,14 +5,14 @@ gncBus = Simulink.Bus;
 gnc = struct();
 
 %% Sim Config
-dt = 6;
+dt = 0.5;
 t_duration = seconds(t_final - t_epoch);
 
 %% GNC
-gnc.modes.science = [170, 190];
-gnc.modes.formationBreak = [190, 192.2];
-gnc.modes.passive = [192.2, 163.6];
-gnc.modes.formationAcquisition = [163.6, 170];
+gnc.modes.science = deg2rad([170, 190]);
+gnc.modes.formationBreak = deg2rad([190, 192.2]);
+gnc.modes.passive = deg2rad([192.2, 163.6]);
+gnc.modes.formationAcquisition = deg2rad([163.6, 170]);
 
 %% Environment
 % Earth Properties 

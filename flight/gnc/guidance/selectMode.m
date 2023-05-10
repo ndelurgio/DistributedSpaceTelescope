@@ -4,7 +4,7 @@ if scienceMode(1) < nu < scienceMode(2)
     mode = "science";
 elseif formationBreakMode(1) < nu < formationBreakMode(2)
     mode = "formationBreak";
-elseif passiveMode(1) < nu < passiveMode(2)
+elseif nu > passiveMode(1) || nu < passiveMode(2)
     mode = "passive";
 elseif formationAcquisitionMode(1) < nu < formationAcquisitionMode(2)
     mode = "formationAcquisition";

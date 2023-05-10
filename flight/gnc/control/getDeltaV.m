@@ -1,14 +1,14 @@
-function [DeltaV,t] = getDeltaV(ROE,location,OE,mu)
+function [DeltaV,t] = getDeltaV(ROE,location,OE,mu,t_prev)
 if norm(ROE) == 0
     DeltaV = [0,0,0];
-    t = 0;
+    t = t_prev;
 else
     % if isempty(location)
     %     DeltaV = [0,0,0];
     % else
     location = location(1);
     e = OE(2);
-    M0 = nu2M(OE(6), e);
+    M0 = OE(6);
     Mf = nu2M(location,e);
     n = meanMotion(mu,OE(1));
     t = (Mf-M0)/n;

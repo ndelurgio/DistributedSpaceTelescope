@@ -5,7 +5,7 @@ gncBus = Simulink.Bus;
 gnc = struct();
 
 %% Sim Config
-dt = 0.5;
+dt = 1;
 t_duration = seconds(t_final - t_epoch);
 
 %% GNC

@@ -8,7 +8,8 @@ grid on;
 hold on;
 plot(time(telem.("Thrust Cmd") == 0)/3600,a*telem.("Mean Eccentric Singular ROE True.relativeSemiMajorAxis")(telem.("Thrust Cmd") == 0),LineWidth=2)
 scatter(time(telem.("Thrust Cmd") == 1)/3600,a*telem.("Mean Eccentric Singular ROE True.relativeSemiMajorAxis")(telem.("Thrust Cmd") == 1),'filled',LineWidth=2)
-legend(["Mean ROE"])
+legend(["Mean ROE", "Maneuver"])
+xlim([0, 10])
 xlabel("t [hr]")
 ylabel("[m]")
 
@@ -18,7 +19,8 @@ grid on;
 hold on;
 plot(time(telem.("Thrust Cmd") == 0)/3600,a*telem.("Mean Eccentric Singular ROE True.relativeLongitude")(telem.("Thrust Cmd") == 0),LineWidth=2)
 scatter(time(telem.("Thrust Cmd") == 1)/3600,a*telem.("Mean Eccentric Singular ROE True.relativeLongitude")(telem.("Thrust Cmd") == 1),'filled',LineWidth=2)
-legend(["Mean ROE"])
+legend(["Mean ROE", "Maneuver"])
+xlim([0, 10])
 xlabel("t [hr]")
 ylabel("[m]")
 
@@ -28,7 +30,8 @@ grid on;
 hold on;
 plot(time(telem.("Thrust Cmd") == 0)/3600,a*telem.("Mean Eccentric Singular ROE True.relativeEccentricityX")(telem.("Thrust Cmd") == 0),LineWidth=2)
 scatter(time(telem.("Thrust Cmd") == 1)/3600,a*telem.("Mean Eccentric Singular ROE True.relativeEccentricityX")(telem.("Thrust Cmd") == 1),'filled',LineWidth=2)
-legend(["Mean ROE"])
+legend(["Mean ROE", "Maneuver"])
+xlim([0, 10])
 xlabel("t [hr]")
 ylabel("[m]")
 
@@ -38,7 +41,8 @@ grid on;
 hold on;
 plot(time(telem.("Thrust Cmd") == 0)/3600,a*telem.("Mean Eccentric Singular ROE True.relativeEccentricityY")(telem.("Thrust Cmd") == 0),LineWidth=2)
 scatter(time(telem.("Thrust Cmd") == 1)/3600,a*telem.("Mean Eccentric Singular ROE True.relativeEccentricityY")(telem.("Thrust Cmd") == 1),'filled',LineWidth=2)
-legend(["Mean ROE"])
+legend(["Mean ROE", "Maneuver"])
+xlim([0, 10])
 xlabel("t [hr]")
 ylabel("[m]")
 
@@ -48,7 +52,8 @@ grid on;
 hold on;
 plot(time(telem.("Thrust Cmd") == 0)/3600,a*telem.("Mean Eccentric Singular ROE True.relativeInclinationX")(telem.("Thrust Cmd") == 0),LineWidth=2)
 scatter(time(telem.("Thrust Cmd") == 1)/3600,a*telem.("Mean Eccentric Singular ROE True.relativeInclinationX")(telem.("Thrust Cmd") == 1),'filled',LineWidth=2)
-legend(["Mean ROE"])
+legend(["Mean ROE", "Maneuver"])
+xlim([0, 10])
 xlabel("t [hr]")
 ylabel("[m]")
 
@@ -58,7 +63,8 @@ grid on;
 hold on;
 plot(time(telem.("Thrust Cmd") == 0)/3600,a*telem.("Mean Eccentric Singular ROE True.relativeInclinationY")(telem.("Thrust Cmd") == 0),LineWidth=2)
 scatter(time(telem.("Thrust Cmd") == 1)/3600,a*telem.("Mean Eccentric Singular ROE True.relativeInclinationY")(telem.("Thrust Cmd") == 1),'filled',LineWidth=2)
-legend(["Mean ROE"])
+legend(["Mean ROE", "Maneuver"])
+xlim([0, 10])
 xlabel("t [hr]")
 ylabel("[m]")
 

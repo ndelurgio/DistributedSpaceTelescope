@@ -4,10 +4,10 @@ dv = dt*cumsum(accel);
 
 figure
 yyaxis left
-plot(time/3600,dv,Linewidth=2)
+plot(time(1:180000)/3600,dv(1:180000),Linewidth=2)
 ylabel("\Delta v")
 yyaxis right
-plot(time/3600,telem.("Deputy Mass"),Linewidth=2)
+plot(time(1:180000)/3600,telem.("Deputy Mass")(1:180000),Linewidth=2)
 ylabel("Mass [kg]")
 xlabel("t [hr]")
 legend(["Accumulated \Delta v","CSC Mass"])

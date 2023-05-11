@@ -17,7 +17,9 @@ p = 1 + plant.chief.initialConditions.meanOrbitElements.eccentricity;
 figure
 a1 = axes();
 plot(a1, time(1:720000)/3600, dr(1:720000))
-scatter(2.9295, 2.8593, )
+xlim(a1, [0, 20])
+ylim(a1, [0, 80])
+% scatter(a1, 2.9295, 2.8593, "filled")
 xlabel("t [hr]")
 ylabel("Minimum Seperation [m]")
 a2 = axes();

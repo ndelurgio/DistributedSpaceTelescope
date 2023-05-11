@@ -19,8 +19,8 @@ if mode == "formationBreak"
         maneuverLocations(1) = nu1;
         n_cmds_out = n_cmds_out + 1;
     elseif curr_nu >= nu1 && curr_nu <= nu2 && n_cmds == 1
-        pseudoState(5) = -desiredInclination(1);
-        pseudoState(6) = -desiredInclination(2);
+        pseudoState(5) = desiredInclination(1);
+        pseudoState(6) = desiredInclination(2);
         maneuverLocations(1) = nu2;
         n_cmds_out = n_cmds_out + 1;
     end

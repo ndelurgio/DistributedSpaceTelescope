@@ -112,6 +112,7 @@ axis equal
 grid on
 hold on;
 title("Relative Velocity in T-N Plane")
+scatter(telem.("Deputy Relative Cartesian State RTN Difference.velocityY_RTN_m")(1),telem.("Deputy Relative Cartesian State RTN Difference.velocityZ_RTN_m")(1),'green','filled')
 plot(telem.("Deputy Relative" + ...
     "" + ...
     " Cartesian State RTN Difference.velocityY_RTN_m"),telem.("Deputy Relative Cartesian State RTN Difference.velocityZ_RTN_m"),'Color','blue',LineWidth=2)

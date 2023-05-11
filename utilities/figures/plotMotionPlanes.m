@@ -7,7 +7,10 @@ axis equal
 grid on
 hold on;
 title("Relative Position in T-R Plane")
-plot(telem.("Deputy Relative Cartesian State RTN Difference.positionY_RTN_m"),telem.("Deputy Relative Cartesian State RTN Difference.positionX_RTN_m"),LineWidth=2)
+scatter(telem.("Deputy Relative Cartesian State RTN Difference.positionY_RTN_m")(1),telem.("Deputy Relative Cartesian State RTN Difference.positionX_RTN_m")(1),'green','filled')
+plot(telem.("Deputy Relative Cartesian State RTN Difference.positionY_RTN_m"),telem.("Deputy Relative Cartesian State RTN Difference.positionX_RTN_m"),'Color','blue',LineWidth=2)
+plot(telem.("Deputy Relative Cartesian State RTN Difference.positionY_RTN_m")(telem.("Thrust Cmd") == 1),telem.("Deputy Relative Cartesian State RTN Difference.positionX_RTN_m")(telem.("Thrust Cmd") == 1),'Color','red',LineWidth=2)
+legend(["Start","Drift","Maneuver"])
 xlabel("T [m]")
 ylabel("R [m]")
 
@@ -17,7 +20,10 @@ axis equal
 grid on
 hold on;
 title("Relative Position in N-R Plane")
-plot(telem.("Deputy Relative Cartesian State RTN Difference.positionZ_RTN_m"),telem.("Deputy Relative Cartesian State RTN Difference.positionX_RTN_m"),LineWidth=2)
+scatter(telem.("Deputy Relative Cartesian State RTN Difference.positionZ_RTN_m")(1),telem.("Deputy Relative Cartesian State RTN Difference.positionX_RTN_m")(1),'green','filled')
+plot(telem.("Deputy Relative Cartesian State RTN Difference.positionZ_RTN_m"),telem.("Deputy Relative Cartesian State RTN Difference.positionX_RTN_m"),'Color','blue',LineWidth=2)
+plot(telem.("Deputy Relative Cartesian State RTN Difference.positionZ_RTN_m")(telem.("Thrust Cmd") == 1),telem.("Deputy Relative Cartesian State RTN Difference.positionX_RTN_m")(telem.("Thrust Cmd") == 1),'Color','red',LineWidth=2)
+legend(["Start","Drift","Maneuver"])
 xlabel("N [m]")
 ylabel("R [m]")
 
@@ -26,7 +32,10 @@ axis equal
 grid on
 hold on;
 title("Relative Position in T-N Plane")
-plot(telem.("Deputy Relative Cartesian State RTN Difference.positionY_RTN_m"),telem.("Deputy Relative Cartesian State RTN Difference.positionZ_RTN_m"),LineWidth=2)
+scatter(telem.("Deputy Relative Cartesian State RTN Difference.positionY_RTN_m")(1),telem.("Deputy Relative Cartesian State RTN Difference.positionZ_RTN_m")(1),'green','filled')
+plot(telem.("Deputy Relative Cartesian State RTN Difference.positionY_RTN_m"),telem.("Deputy Relative Cartesian State RTN Difference.positionZ_RTN_m"),'Color','blue',LineWidth=2)
+plot(telem.("Deputy Relative Cartesian State RTN Difference.positionY_RTN_m")(telem.("Thrust Cmd") == 1),telem.("Deputy Relative Cartesian State RTN Difference.positionZ_RTN_m")(telem.("Thrust Cmd") == 1),'Color','red',LineWidth=2)
+legend(["Start","Drift","Maneuver"])
 xlabel("T [m]")
 ylabel("N [m]")
 switch linearModel
@@ -80,16 +89,21 @@ axis equal
 grid on
 hold on;
 title("Relative Velocity in T-R Plane")
-plot(telem.("Deputy Relative Cartesian State RTN Difference.velocityY_RTN_m"),telem.("Deputy Relative Cartesian State RTN Difference.velocityX_RTN_m"),LineWidth=2)
+scatter(telem.("Deputy Relative Cartesian State RTN Difference.velocityY_RTN_m")(1),telem.("Deputy Relative Cartesian State RTN Difference.velocityX_RTN_m")(1),'green','filled')
+plot(telem.("Deputy Relative Cartesian State RTN Difference.velocityY_RTN_m"),telem.("Deputy Relative Cartesian State RTN Difference.velocityX_RTN_m"),'Color','blue',LineWidth=2)
+plot(telem.("Deputy Relative Cartesian State RTN Difference.velocityY_RTN_m")(telem.("Thrust Cmd") == 1),telem.("Deputy Relative Cartesian State RTN Difference.velocityX_RTN_m")(telem.("Thrust Cmd") == 1),'Color','red',LineWidth=2)
+legend(["Start","Drift","Maneuver"])
 xlabel("T [m/s]")
 ylabel("R [m/s]")
-
 subplot(3, 1, 2)
 axis equal
 grid on
 hold on;
 title("Relative Velocity in N-R Plane")
-plot(telem.("Deputy Relative Cartesian State RTN Difference.velocityZ_RTN_m"),telem.("Deputy Relative Cartesian State RTN Difference.velocityX_RTN_m"),LineWidth=2)
+scatter(telem.("Deputy Relative Cartesian State RTN Difference.velocityZ_RTN_m")(1),telem.("Deputy Relative Cartesian State RTN Difference.velocityX_RTN_m")(1),'green','filled')
+plot(telem.("Deputy Relative Cartesian State RTN Difference.velocityZ_RTN_m"),telem.("Deputy Relative Cartesian State RTN Difference.velocityX_RTN_m"),'Color','blue',LineWidth=2)
+plot(telem.("Deputy Relative Cartesian State RTN Difference.velocityZ_RTN_m")(telem.("Thrust Cmd") == 1),telem.("Deputy Relative Cartesian State RTN Difference.velocityX_RTN_m")(telem.("Thrust Cmd") == 1),'Color','red',LineWidth=2)
+legend(["Start","Drift","Maneuver"])
 xlabel("N [m/s]")
 ylabel("R [m/s]")
 
@@ -98,7 +112,11 @@ axis equal
 grid on
 hold on;
 title("Relative Velocity in T-N Plane")
-plot(telem.("Deputy Relative Cartesian State RTN Difference.velocityY_RTN_m"),telem.("Deputy Relative Cartesian State RTN Difference.velocityZ_RTN_m"),LineWidth=2)
+plot(telem.("Deputy Relative" + ...
+    "" + ...
+    " Cartesian State RTN Difference.velocityY_RTN_m"),telem.("Deputy Relative Cartesian State RTN Difference.velocityZ_RTN_m"),'Color','blue',LineWidth=2)
+plot(telem.("Deputy Relative Cartesian State RTN Difference.velocityY_RTN_m")(telem.("Thrust Cmd") == 1),telem.("Deputy Relative Cartesian State RTN Difference.velocityZ_RTN_m")(telem.("Thrust Cmd") == 1),'Color','red',LineWidth=2)
+legend(["Start","Drift","Maneuver"])
 xlabel("T [m/s]")
 ylabel("N [m/s]")
 switch linearModel

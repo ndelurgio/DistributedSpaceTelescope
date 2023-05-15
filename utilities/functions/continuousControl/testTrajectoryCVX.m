@@ -13,16 +13,15 @@ n = 6;
 m = 3;
 U_max = 4.2183e-05;
 uMatrix = zeros(simPoints * N, m);
-deltaDaMatrix = zeros(simPoints * N, n);
+roeMatrix = zeros(simPoints * N, n);
 
 % Run the simulation
 for i = 1:simPoints
-    t = i * dt;
-    STM = keplerSTM(oeChief(i, :), t, mu);
+    STM = keplerSTM(oeChief(i, :), dt, mu);
     Gamma = getControlInputMatrix(oeChief(i, :), mu);
-    deltaDa_i = roeTraj(i, :);
-    deltaDa_f = roeTraj(i+1, :);
-    [u, deltaDa] = trajectoryCVX(deltaDa_i, deltaDa_f, STM, U_max, Gamma, N);
+    roe_i = roeTraj(i, :);
+    roe_f = roeTraj(i+1, :);
+    [u, roe] = trajectoryCVX(roe_i, roe_f, STM, U_max, Gamma, N);
     uMatrix((i-1)*N+1:i*N, :) = u';
-    deltaDaMatrix((i-1)*N+1:i*N, :) = deltaDa';
+    roeMatrix((i-1)*N+1:i*N, :) = roe';
 end

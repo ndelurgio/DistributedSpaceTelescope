@@ -1,4 +1,4 @@
-function [u, deltaDa] = trajectoryCVX(deltaDa_i, deltaDa_f, STM, U_max, Gamma, N)
+function [u, roe] = trajectoryCVX(roe_i, roe_f, STM, U_max, Gamma, N)
 % Calculate the optimal trajectory using convex optimization (CVX)
 % deltaDa_i: initial pseudostate (from guidance)
 % deltaDa_i: final pseudostate (from guidance)
@@ -21,7 +21,7 @@ cvx_begin
     minimize (cost)  % norm apparently preferred by CVX over quad forms
     subject to
         % Initial time constraint
-        deltaDa(:, 1) == deltaDa_i';
+        deltaDa(:, 1) == roe_i';
         % The dynamics and deltaV constraints
         for t = 1:N-1
             deltaDa(:, t + 1) == STM * deltaDa(:, t) + Gamma * u(:, t);
@@ -29,7 +29,7 @@ cvx_begin
         end
         norm(u(:, end)) <= U_max;
         % Final time constraint
-        deltaDa(:, end) == deltaDa_f';
+        deltaDa(:, end) == roe_f';
         % Maximum thrust constraint
 cvx_end
 

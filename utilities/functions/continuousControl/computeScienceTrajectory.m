@@ -4,14 +4,14 @@ out = sim('getChiefData');
 
 time = out.tout;
 telem = extractTimetable(out.logsout);
-
+%%
 chiefPos = [telem.("Chief Cartesian State J2000.positionX_J2000_m"), telem.("Chief Cartesian State J2000.positionY_J2000_m"), telem.("Chief Cartesian State J2000.positionZ_J2000_m")];
 
 deputyPos = zeros(length(time),3);
 for i = 1:length(time)
     sunPos = telem.("Sun Position")(i,:);
     r_chief2sun = (sunPos - chiefPos(i,:)) / norm(sunPos - chiefPos(i,:));
-    deputyPos(i,:) = chiefPos(i,:) + 250 * r_chief2sun;
+    deputyPos(i,:) = chiefPos(i,:) + 50 * r_chief2sun;
 end
 
 deputyVel = diff(deputyPos)/dt;

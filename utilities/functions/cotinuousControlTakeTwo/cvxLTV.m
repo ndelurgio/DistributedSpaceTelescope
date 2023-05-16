@@ -27,13 +27,30 @@ for j = i-1:-1:1
 end
 
 y = roef - At*roe0;
-uvec = toeplitz' * (toeplitz*toeplitz' \ y);
-umat = reshape(uvec,3,[]);
+
+cvx_begin
+    cvx_precision best
+    % cvx_solver sedumi
+    variable u(3*i)
+    
+    um = reshape(u,3,[]);
+    cost = 0;
+    for j = 1:i
+        cost = cost + norm(um(:, j));
+    end
+    minimize (cost)
+    subject to
+        y == toeplitz*u;
+        for j = 1:i
+            norm(um(:,j)) <= 4.2183e-05 * dt * 100;
+        end
+cvx_end
+
+umat = reshape(u,3,[]);
 dv = 0;
 for j = 1:length(umat(1,:))
     dv = dv + norm(umat(:,j));
 end
-
 
 % Sim Test
 roe = roe0;

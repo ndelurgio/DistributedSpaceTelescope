@@ -35,4 +35,4 @@ delta_t = 6;
 
 loadSimConfig;
 
-clear chiefOE deputyOE J2_flag srp_flag
+% clear chiefOE deputyOE J2_flag srp_flag

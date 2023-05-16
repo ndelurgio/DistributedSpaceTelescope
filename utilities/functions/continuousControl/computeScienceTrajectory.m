@@ -1,6 +1,6 @@
-% pset6;
-% 
-% out = sim('getChiefData');
+pset6;
+
+out = sim('getChiefData');
 
 time = out.tout;
 telem = extractTimetable(out.logsout);

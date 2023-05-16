@@ -8,8 +8,8 @@ eta = sqrt(1 - e^2);
 n = meanMotion(mu, a);
 
 STM = eye(6);
-STM(2, 1) = -3/2 * n * t / eta^2;
-STM(3, 1) = -3/2 * e_y * n * t / eta^2;
-STM(4, 1) = 3/2 * e_x * n * t / eta^2;
+STM(2, 1) = -3/2 * n * t / eta^3;
+STM(3, 1) = -3/2 * e_y * n * t / eta^3;
+STM(4, 1) = 3/2 * e_x * n * t / eta^3;
 
 end

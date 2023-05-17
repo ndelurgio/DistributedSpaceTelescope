@@ -41,9 +41,10 @@ cvx_begin
     minimize (cost)
     subject to
         y == toeplitz*u;
-        for j = 1:i
-            norm(um(:,j)) <= 4.2183e-05 * dt * 100;
-        end
+        % a*norm(y-toeplitz*u) <= 1;
+        % for j = 1:i
+        %     norm(um(:,j)) <= 4.2183e-05 * dt * 100;
+        % end
 cvx_end
 
 umat = reshape(u,3,[]);

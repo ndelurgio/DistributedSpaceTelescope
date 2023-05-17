@@ -22,7 +22,7 @@ srp_flag = 0;
 
 [sunPosData, sunTimeData] = generateSunEphemeris(t_epoch,t_final,60);
 sunPos = getSunPosition(sunPosData, sunTimeData, 1);
-delta_t = 1;
+delta_t = 6;
 % chiefOE = mean2osc(chiefOE,J2_flag);
 % [rChiefECI, vChiefECI] = oe2eci(chiefOE(1), chiefOE(2), chiefOE(3), chiefOE(4), chiefOE(5), chiefOE(6), mu);
 % 

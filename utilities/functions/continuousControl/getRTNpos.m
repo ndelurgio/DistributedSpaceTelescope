@@ -1,15 +1,15 @@
 rtn_state = zeros(length(deputyROE(:,1)),6);
-rtn_state_cvx = zeros(length(simROE(:,1)),6);
+rtn_state_cvx = zeros(length(roe(1,:)),6);
 for i = 1:length(deputyROE(:,1))
     % t = i*dt;
     phi = cartesianGuffantiSolution(chiefOE(i,:), 0, plant.environment.earthProperties.gravitationalParameter_m3_s2);
     rtn_state(i,:) = (phi*deputyROE(i,:)')';
 end
 
-for i = 1:length(simROE(:,1))
+for i = 1:length(roe(1,:))
     % t = i*dt;
-    phi = cartesianGuffantiSolution(chiefOE(ceil(i/N),:), 0, plant.environment.earthProperties.gravitationalParameter_m3_s2);
-    rtn_state_cvx(i,:) = (phi*simROE(i,:)')';
+    phi = cartesianGuffantiSolution(chiefOE(i,:), 0, plant.environment.earthProperties.gravitationalParameter_m3_s2);
+    rtn_state_cvx(i,:) = (phi*roe(:,i))';
 end
 
 figure

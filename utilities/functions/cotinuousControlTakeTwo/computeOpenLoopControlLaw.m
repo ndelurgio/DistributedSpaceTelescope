@@ -1,4 +1,4 @@
-solver = 'cvx_min_sum_norm';
+solver = 'min_norm';
 waypoint_dt = 3600;
 dt = delta_t;
 steps = ceil(waypoint_dt/dt);
@@ -47,8 +47,10 @@ for i = 1:n_waypoints
             umat = reshape(uvec,3,[]);
             u_mat_full(:,indx0:indxf) = umat;
         case 'cvx_min_sum_norm'
+            y = roef - At*roe0;
             cvx_begin
                 cvx_precision best
+                % cvx_solver sedumi
                 variable u(3*steps)
                 um = reshape(u,3,[]);
                 cost = 0;
@@ -56,18 +58,10 @@ for i = 1:n_waypoints
                     cost = cost + norm(um(:, j));
                     
                 end
-                % for j = 2:steps
-                %     cost = cost + norm((um(:,j)-um(:,j-1)));
-                % end
                 minimize (cost)
                 subject to
                     y == toeplitz*u;
-                    % a*norm(y-toeplitz*u) <= 1;
-                    % for j = 1:i
-                    %     norm(um(:,j)) <= 4.2183e-05 * dt * 100;
-                    % end
             cvx_end
-            % umat = reshape(u,3,[]);
             u_mat_full(:,indx0:indxf) = um;
     end
 end

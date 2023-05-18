@@ -1,14 +1,10 @@
-solver = 'min_norm';
-waypoint_dt = 20000 - 1*3600;
+solver = 'cvx_min_sum_norm';
+waypoint_dt = 3600; % Time between waypoints
 dt = delta_t;
-steps = ceil(waypoint_dt/dt);
+steps = ceil(waypoint_dt/dt); % Number of Discrete Steps between waypoints
 
-n_waypoints = floor(time(end)/waypoint_dt);
-% n_waypoints = 10;
+n_waypoints = floor(time(end)/waypoint_dt); % Total number of waypoints
 u_mat_full = zeros(3,steps*n_waypoints);
-% 
-% Ad_full = [];
-% Bd_full = [];
 
 for i = 1:n_waypoints
     % Get initial and final states
@@ -17,7 +13,7 @@ for i = 1:n_waypoints
     roe0 = deputyROE(indx0,:)';
     roef = deputyROE(indxf,:)';
 
-    % Compute toeplitz matrix
+    % Compute linear system matrices for each time step
     Ad = zeros(6,6,steps);
     Bd = zeros(6,3,steps);
     At = eye(6);
@@ -27,9 +23,8 @@ for i = 1:n_waypoints
         Bd(:,:,j) = getMatrixBdiscrete(oej,mu,dt);
         At = Ad(:,:,j)*At;
     end
-    % Ad_full = [Ad_full; Ad];
-    % Bd_full = [Bd_full; Ad];
-    
+
+    % Compute toeplitz (block) matrix for dynamics
     toeplitz = Bd(:,:,end);
     for j = (steps-1):-1:1
         term = Bd(:,:,j);
@@ -38,44 +33,39 @@ for i = 1:n_waypoints
         end
         toeplitz = [term, toeplitz];
     end
+    % Solve the control problem using different methods
     switch solver
-        case 'min_norm'
-            % Least Norm Solution
+        case 'min_norm' % Least Norm Solution, Minimize Sum of the Squares
             y = roef - At*roe0;
             uvec = toeplitz' * (toeplitz*toeplitz' \ y);
-            % uvec = pinv(toeplitz) * y;
             umat = reshape(uvec,3,[]);
             u_mat_full(:,indx0:indxf) = umat;
-        case 'cvx_min_sum_norm'
+        case 'cvx_min_sum_norm' % Convex Program without control constraints
             y = roef - At*roe0;
             cvx_begin
                 cvx_precision best
-                % cvx_solver sedumi
                 variable u(3*steps)
                 um = reshape(u,3,[]);
                 cost = 0;
                 for j = 1:steps
-                    cost = cost + norm(um(:, j));
-                    
+                    cost = cost + norm(um(:, j)); % Minimize Sum of the Norms
                 end
                 minimize (cost)
                 subject to
                     y == toeplitz*u;
             cvx_end
             u_mat_full(:,indx0:indxf) = um;
-        case 'cvx_constrained'
+        case 'cvx_constrained' % Convex Program with control constraints
             y = roef - At*roe0;
             cvx_begin
                 cvx_precision best
-                % cvx_solver sedumi
                 variable u(3*steps)
                 um = reshape(u,3,[]);
                 cost = 0;
                 for j = 1:steps
                     cost = cost + norm(um(:, j));
-                    
                 end
-                minimize (cost)
+                minimize (cost) % Minimize Sum of the Norms
                 subject to
                     y == toeplitz*u;
                     for j = 1:steps
@@ -86,7 +76,7 @@ for i = 1:n_waypoints
     end
 end
 
-% Sim Test
+% Low fidelity simulator to test accuracy of algorithms
 roe = zeros(6,length(u_mat_full)+1);
 roe(:,1) = deputyROE(1,:)';
 for j = 1:length(u_mat_full)
@@ -94,7 +84,6 @@ for j = 1:length(u_mat_full)
     Ad = getMatrixAdiscrete(oej,mu,dt);
     Bd = getMatrixBdiscrete(oej,mu,dt);
     roe(:,j+1) = Ad*roe(:,j) + Bd*u_mat_full(:,j);
-    % roe(:,j+1) = Ad(:,:,j)*roe + Bd(:,:,j)*umat(:,j);
 end
 
 dv = 0;

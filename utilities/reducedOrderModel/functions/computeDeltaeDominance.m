@@ -19,6 +19,7 @@ if Delta_dex == 0 % zero dex special case
     if nu(1) < 0
         nu(1) = nu(1) + 2*pi;
     end
+    nu = [nu, 2*pi-nu(1)];
     Delta_dey_max = 1/(n*a) * eta/e * sin(nu(1)) * (2+e*cos(nu(1)))/(1+e*cos(nu(1)));
     dv_min = abs(Delta_dey/Delta_dey_max);
 elseif Delta_dey == 0 % zero dey special case

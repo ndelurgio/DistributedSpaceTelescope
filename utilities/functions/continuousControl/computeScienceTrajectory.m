@@ -16,6 +16,7 @@ end
 
 deputyVel = diff(deputyPos)/dt;
 deputyECI = [deputyPos(1:end-1,:), deputyVel];
+deputyECI = deputyECI(1:end-10,:);
 
 deputyOE = zeros(length(deputyECI(:,1)),6);
 chiefOE = zeros(length(deputyECI(:,1)),6);
@@ -33,3 +34,5 @@ for i = 1:length(deputyECI(:,1))
     ];
     deputyROE(i,:) = computeEccentricSingularROE(chiefOE(i,:),deputyOE(i,:));
 end
+
+time = time(1:end-10);

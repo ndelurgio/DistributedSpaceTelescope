@@ -16,7 +16,7 @@ end
 maneuverTimes = [];
 maneuverLocations = [];
 maneuverVectors = [];
-dv_total = [];
+dv_total = 0;
 
 a = OE(1);
 e = OE(2);
@@ -29,6 +29,7 @@ n = meanMotion(mu,a);
 
 % Convert to Control ROE
 DeltaROE_control = guidance2controlROE(DeltaROE_guidance,OE);
+DeltaROE_control*a
 
 %%% In-plane Maneuvers
 % Find Dominance Case
@@ -92,6 +93,8 @@ if norm(Delta_di) ~= 0
     
 end
 
-
+for i = 1:length(maneuverLocations)
+    dv_total = dv_total + norm(maneuverVectors(i,:));
+end
 
 end

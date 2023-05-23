@@ -49,7 +49,7 @@ end
 locationCandidates = locationCandidates(locationCandidates > M);
 locationCandidates = locationCandidates((locationCandidates - M)/n < T_duration);
 % Require at least 3 maneuvers
-if length(locationCandidates) < 4
+if length(locationCandidates) < 3
     throw("Error: Less than three location candidates for delta-e maneuver.")
 end
 
@@ -72,9 +72,16 @@ for i = 1:length(combos(:,1))
 
     A = [STM1*G1(:,2), STM2*G2(:,2), STM3*G3(:,2)];
     % A(3,:) = [1,1,1];
+    s1 = getSign([G1(3,2), G1(4,2)], [Delta_dex,Delta_dey]);
+    s2 = getSign([G2(3,2), G2(4,2)], [Delta_dex,Delta_dey]);
+    s3 = getSign([G3(3,2), G3(4,2)], [Delta_dex,Delta_dey]);
+    A(3,:) = [s1,s2,s3] .* sqrt(A(3,:).^2 + A(4,:).^2);
+    % A(3,:) = A(4,:);
     A = A(1:3,:);
     % c = A \ [Delta_da; Delta_dlam; 1];
-    dvT = A \ [Delta_da; Delta_dlam; Delta_dex];
+    dvT = A \ [Delta_da; Delta_dlam; sqrt(Delta_dex^2 + Delta_dey^2)];
+    % dvT = A \ [Delta_da; Delta_dlam; Delta_dey];
+
     if norm(dvT,1) < dv_best || (norm(dvT,1) == dv_best && M3 < maneuverLocations(3))
         maneuverLocations = [M1, M2, M3];
         maneuverVectors = [0, dvT(1), 0; 0, dvT(2), 0; 0, dvT(3), 0];

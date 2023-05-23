@@ -76,6 +76,8 @@ for i = 1:n_waypoints
     end
 end
 
+u_time = time(1:length(u_mat_full(1,:)));
+
 % Low fidelity simulator to test accuracy of algorithms
 roe = zeros(6,length(u_mat_full)+1);
 roe(:,1) = deputyROE(1,:)';

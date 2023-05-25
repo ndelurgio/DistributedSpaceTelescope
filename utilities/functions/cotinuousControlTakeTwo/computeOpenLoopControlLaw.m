@@ -1,4 +1,4 @@
-solver = 'min_norm';
+solver = 'cvx_constrained';
 waypoint_dt = 20000; % Time between waypoints
 dt = delta_t;
 steps = ceil(waypoint_dt/dt); % Number of Discrete Steps between waypoints

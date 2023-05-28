@@ -13,6 +13,7 @@ gnc.modes.science = deg2rad([170, 190]);
 gnc.modes.formationBreak = deg2rad([190, 192.2]);
 gnc.modes.passive = deg2rad([192.2, 163.6]);
 gnc.modes.formationAcquisition = deg2rad([163.6, 170]);
+enableGNC = 0;
 
 %% Environment
 % Earth Properties 

@@ -35,9 +35,18 @@ plant.environment.constants.AU_m = 1.496e11;
 plant.chief.properties.SRPcoefficient = 1.29;
 plant.chief.properties.area_m2 = 3.34;
 plant.chief.properties.dryMass_kg = 327;
+
 plant.chief.properties.actuators.thruster.thrust_N = 0.0143;
 plant.chief.properties.actuators.thruster.isp_s = 68;
 
+plant.chief.properties.sensors.imu.bias_mps2 = [0;0;0];
+plant.chief.properties.sensors.imu.sensorCovariance_m2ps4 = 0.014*eye(3);
+plant.chief.properties.sensors.imu.processCovariance_m2ps9 = 1e-6*eye(3);
+
+plant.chief.properties.sensors.gps.positionBias_m = [0;0;0];
+plant.chief.properties.sensors.gps.positionCovariance_m2 = 10*eye(3);
+plant.chief.properties.sensors.gps.velocityBias_mps = [0;0;0];
+plant.chief.properties.sensors.gps.velocityCovariance_m2ps2 = 1*eye(3);
 
 % Initial Conditions
 plant.chief.initialConditions.mass_kg = 339;
@@ -106,8 +115,18 @@ clear r_ijk v_ijk
 plant.deputy.properties.SRPcoefficient = 1.90;
 plant.deputy.properties.area_m2 = 1.77;
 plant.deputy.properties.dryMass_kg = 190;
+
 plant.deputy.properties.actuators.thruster.thrust_N = 2.1;
 plant.deputy.properties.actuators.thruster.isp_s = 235;
+
+plant.deputy.properties.sensors.imu.bias_mps2 = [0;0;0];
+plant.deputy.properties.sensors.imu.sensorCovariance_m2ps4 = 0.014*eye(3);
+plant.deputy.properties.sensors.imu.processCovariance_m2ps9 = 1e-6*eye(3);
+
+plant.deputy.properties.sensors.gps.positionBias_m = [0;0;0];
+plant.deputy.properties.sensors.gps.positionCovariance_m2 = 10*eye(3);
+plant.deputy.properties.sensors.gps.velocityBias_mps = [0;0;0];
+plant.deputy.properties.sensors.gps.velocityCovariance_m2ps2 = 1*eye(3);
 
 % Initial Conditions
 plant.deputy.initialConditions.mass_kg = 211;
@@ -366,8 +385,16 @@ chief               = createBus(plant.chief);
 actuators           = createBus(plant.chief.properties.actuators);
 thruster            = createBus(plant.chief.properties.actuators.thruster);
 actuators           = addToBus(actuators,"thruster","bus");
+
+sensors             = createBus(plant.chief.properties.sensors);
+imu                 = createBus(plant.chief.properties.sensors.imu);
+gps                 = createBus(plant.chief.properties.sensors.gps);
+sensors             = addToBus(sensors,"imu","bus");
+sensors             = addToBus(sensors,"gps","bus");
+
 properties          = createBus(plant.chief.properties);
 properties          = addToBus(properties,"actuators","bus");
+properties          = addToBus(properties,"sensors","bus");
 
 
 meanOrbitElements   = createBus(plant.chief.initialConditions.meanOrbitElements);

@@ -1,7 +1,7 @@
-function [outputArg1,outputArg2] = imuDynamics(inputArg1,inputArg2)
-%IMUDYNAMICS Summary of this function goes here
-%   Detailed explanation goes here
-outputArg1 = inputArg1;
-outputArg2 = inputArg2;
+function bdot = imuDynamics(Q)
+
+rng('default')
+bdot = mvnrnd([0;0;0],Q);
+
 end
 

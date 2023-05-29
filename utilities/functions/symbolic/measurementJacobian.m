@@ -1,7 +1,7 @@
 syms rx ry rz vx vy vz Cr A Psi m c AU r_sunx r_suny r_sunz brx bry brz bvx bvy bvz bax bay baz ux uy uz
 
 r = sqrt(rx^2+ry^2+rz^2);
-B = 3/2*J2*mu*Re^2;
+% B = 3/2*J2*mu*Re^2;
 syms B
 
 kepx = -mu*rx/r^3;

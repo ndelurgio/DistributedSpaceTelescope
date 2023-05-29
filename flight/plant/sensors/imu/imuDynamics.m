@@ -1,7 +1,7 @@
-function bdot = imuDynamics(Q)
+function bdot = imuDynamics(sqrtQ,noise)
 
-rng('default')
-bdot = mvnrnd([0;0;0],Q)';
+noise = sqrtQ*noise;
+bdot = noise;
 
 end
 

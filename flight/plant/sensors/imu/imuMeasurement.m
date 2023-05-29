@@ -1,7 +1,7 @@
-function y_imu = imuMeasurement(d_SRP,a_control,b,R)
+function y_imu = imuMeasurement(d_SRP,a_control,b,sqrtR,noise)
 
-rng('default');
-y_imu = d_SRP + a_control + b + mvnrnd([0;0;0],R)';
+noise = sqrtR*noise;
+y_imu = d_SRP + a_control + b + noise;
 
 end
 

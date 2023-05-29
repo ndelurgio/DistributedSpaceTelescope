@@ -41,13 +41,17 @@ plant.chief.properties.actuators.thruster.thrust_N = 0.0143;
 plant.chief.properties.actuators.thruster.isp_s = 68;
 
 plant.chief.properties.sensors.imu.bias_mps2 = [0;0;0];
-plant.chief.properties.sensors.imu.sensorCovariance_m2ps4 = 0.014*eye(3);
-plant.chief.properties.sensors.imu.processCovariance_m2ps9 = 1e-6*eye(3);
+plant.chief.properties.sensors.imu.sensorCovariance_m2ps4 = 0.00014*eye(3);
+plant.chief.properties.sensors.imu.sensorSqrtCovariance_mps2 = sqrtm(plant.chief.properties.sensors.imu.sensorCovariance_m2ps4);
+plant.chief.properties.sensors.imu.processCovariance_m2ps9 = (1e-8)*eye(3);
+plant.chief.properties.sensors.imu.processSqrtCovariance_mps3 = sqrtm(plant.chief.properties.sensors.imu.processCovariance_m2ps9);
 
 plant.chief.properties.sensors.gps.positionBias_m = [0;0;0];
-plant.chief.properties.sensors.gps.positionCovariance_m2 = 10*eye(3);
+plant.chief.properties.sensors.gps.positionCovariance_m2 = 1000*eye(3);
+plant.chief.properties.sensors.gps.positionSqrtCovariance_m = sqrtm(plant.chief.properties.sensors.gps.positionCovariance_m2);
 plant.chief.properties.sensors.gps.velocityBias_mps = [0;0;0];
-plant.chief.properties.sensors.gps.velocityCovariance_m2ps2 = 1*eye(3);
+plant.chief.properties.sensors.gps.velocityCovariance_m2ps2 = 10*eye(3);
+plant.chief.properties.sensors.gps.velocitySqrtCovariance_m2ps2 = sqrtm(plant.chief.properties.sensors.gps.velocityCovariance_m2ps2);
 
 % Initial Conditions
 plant.chief.initialConditions.mass_kg = 339;
@@ -121,14 +125,17 @@ plant.deputy.properties.actuators.thruster.thrust_N = 2.1;
 plant.deputy.properties.actuators.thruster.isp_s = 235;
 
 plant.deputy.properties.sensors.imu.bias_mps2 = [0;0;0];
-plant.deputy.properties.sensors.imu.sensorCovariance_m2ps4 = 0.014*eye(3);
-plant.deputy.properties.sensors.imu.processCovariance_m2ps9 = 1e-6*eye(3);
+plant.deputy.properties.sensors.imu.sensorCovariance_m2ps4 = 0.00014*eye(3);
+plant.deputy.properties.sensors.imu.sensorSqrtCovariance_mps2 = sqrtm(plant.deputy.properties.sensors.imu.sensorCovariance_m2ps4);
+plant.deputy.properties.sensors.imu.processCovariance_m2ps9 = (1e-8)*eye(3);
+plant.deputy.properties.sensors.imu.processSqrtCovariance_mps3 = sqrtm(plant.deputy.properties.sensors.imu.processCovariance_m2ps9);
 
 plant.deputy.properties.sensors.gps.positionBias_m = [0;0;0];
-plant.deputy.properties.sensors.gps.positionCovariance_m2 = 10*eye(3);
+plant.deputy.properties.sensors.gps.positionCovariance_m2 = 1000*eye(3);
+plant.deputy.properties.sensors.gps.positionSqrtCovariance_m = sqrtm(plant.deputy.properties.sensors.gps.positionCovariance_m2);
 plant.deputy.properties.sensors.gps.velocityBias_mps = [0;0;0];
-plant.deputy.properties.sensors.gps.velocityCovariance_m2ps2 = 1*eye(3);
-
+plant.deputy.properties.sensors.gps.velocityCovariance_m2ps2 = 10*eye(3);
+plant.deputy.properties.sensors.gps.velocitySqrtCovariance_m2ps2 = sqrtm(plant.deputy.properties.sensors.gps.velocityCovariance_m2ps2);
 % Initial Conditions
 plant.deputy.initialConditions.mass_kg = 211;
 

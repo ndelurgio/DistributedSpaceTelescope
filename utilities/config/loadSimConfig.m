@@ -46,10 +46,10 @@ plant.chief.properties.sensors.imu.sensorSqrtCovariance_mps2 = sqrtm(plant.chief
 plant.chief.properties.sensors.imu.processCovariance_m2ps9 = (1e-8)*eye(3);
 plant.chief.properties.sensors.imu.processSqrtCovariance_mps3 = sqrtm(plant.chief.properties.sensors.imu.processCovariance_m2ps9);
 
-plant.chief.properties.sensors.gps.positionBias_m = [0;0;0];
-plant.chief.properties.sensors.gps.positionCovariance_m2 = 1000*eye(3);
+plant.chief.properties.sensors.gps.positionBias_m = 10 * [1;1;1];
+plant.chief.properties.sensors.gps.positionCovariance_m2 =100*eye(3);
 plant.chief.properties.sensors.gps.positionSqrtCovariance_m = sqrtm(plant.chief.properties.sensors.gps.positionCovariance_m2);
-plant.chief.properties.sensors.gps.velocityBias_mps = [0;0;0];
+plant.chief.properties.sensors.gps.velocityBias_mps = 10 * [1;1;1];
 plant.chief.properties.sensors.gps.velocityCovariance_m2ps2 = 10*eye(3);
 plant.chief.properties.sensors.gps.velocitySqrtCovariance_m2ps2 = sqrtm(plant.chief.properties.sensors.gps.velocityCovariance_m2ps2);
 

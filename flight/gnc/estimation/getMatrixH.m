@@ -17,8 +17,8 @@ rssz_c = r_sunz - rz_c;
 rss_c = sqrt(rssx_c^2+rssy_c^2+rssz_c^2);
 
 K_c = -Bsrp_c*p_sr*AU^2;
-L_c = [-(K_c*(rss_c^2 - 3*rssx_c^2))/(rss_c^2)^(5/2),         (3*K_c*rssx_c*rssy_c)/(rss_c^2)^(5/2),         (3*K_c*rssx_c*rssz_c)/(rss_c^2)^(5/2), 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0;
-        (3*K_c*rssx_c*rssy_c)/(rss_c^2)^(5/2), -(K_c*(rss_c^2 - 3*rssy_c^2))/(rss_c^2)^(5/2),         (3*K_c*rssy_c*rssz_c)/(rss_c^2)^(5/2), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0;
+L_c = [-(K_c*(rss_c^2 - 3*rssx_c^2))/(rss_c^2)^(5/2),         (3*K_c*rssx_c*rssy_c)/(rss_c^2)^(5/2),         (3*K_c*rssx_c*rssz_c)/(rss_c^2)^(5/2);
+        (3*K_c*rssx_c*rssy_c)/(rss_c^2)^(5/2), -(K_c*(rss_c^2 - 3*rssy_c^2))/(rss_c^2)^(5/2),         (3*K_c*rssy_c*rssz_c)/(rss_c^2)^(5/2);
         (3*K_c*rssx_c*rssz_c)/(rss_c^2)^(5/2),         (3*K_c*rssy_c*rssz_c)/(rss_c^2)^(5/2), -(K_c*(rss_c^2 - 3*rssz_c^2))/(rss_c^2)^(5/2);
 ];
 
@@ -33,8 +33,8 @@ rssz_d = r_sunz - rz_d;
 rss_d = sqrt(rssx_d^2+rssy_d^2+rssz_d^2);
 
 K_d = -Bsrp_d*p_sr*AU^2;
-L_d = [-(K_d*(rss_d^2 - 3*rssx_d^2))/(rss_d^2)^(5/2),         (3*K_d*rssx_d*rssy_d)/(rss_d^2)^(5/2),         (3*K_d*rssx_d*rssz_d)/(rss_d^2)^(5/2), 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0;
-        (3*K_d*rssx_d*rssy_d)/(rss_d^2)^(5/2), -(K_d*(rss_d^2 - 3*rssy_d^2))/(rss_d^2)^(5/2),         (3*K_d*rssy_d*rssz_d)/(rss_d^2)^(5/2), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0;
+L_d = [-(K_d*(rss_d^2 - 3*rssx_d^2))/(rss_d^2)^(5/2),         (3*K_d*rssx_d*rssy_d)/(rss_d^2)^(5/2),         (3*K_d*rssx_d*rssz_d)/(rss_d^2)^(5/2);
+        (3*K_d*rssx_d*rssy_d)/(rss_d^2)^(5/2), -(K_d*(rss_d^2 - 3*rssy_d^2))/(rss_d^2)^(5/2),         (3*K_d*rssy_d*rssz_d)/(rss_d^2)^(5/2);
         (3*K_d*rssx_d*rssz_d)/(rss_d^2)^(5/2),         (3*K_d*rssy_d*rssz_d)/(rss_d^2)^(5/2), -(K_d*(rss_d^2 - 3*rssz_d^2))/(rss_d^2)^(5/2);
 ];
 

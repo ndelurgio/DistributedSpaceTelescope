@@ -8,13 +8,6 @@ gnc = struct();
 dt = delta_t;
 t_duration = seconds(t_final - t_epoch);
 
-%% GNC
-gnc.modes.science = deg2rad([170, 190]);
-gnc.modes.formationBreak = deg2rad([190, 192.2]);
-gnc.modes.passive = deg2rad([192.2, 163.6]);
-gnc.modes.formationAcquisition = deg2rad([163.6, 170]);
-enableGNC = 0;
-
 %% Environment
 % Earth Properties 
 plant.environment.earthProperties.radius_m = 6.378e6;
@@ -113,7 +106,7 @@ plant.chief.initialConditions.cartesianState.velocityY_J2000_m = v_ijk(2);
 plant.chief.initialConditions.cartesianState.velocityZ_J2000_m = v_ijk(3);
 [~, R_eci2rtn] = eci2rtn([r_ijk; v_ijk]);
 theta0_dot = computeTheta0_dot(norm(r_ijk),plant.environment.earthProperties.gravitationalParameter_m3_s2,plant.chief.initialConditions.osculatingOrbitElements.semiMajorAxis_m,plant.chief.initialConditions.osculatingOrbitElements.eccentricity);
-clear r_ijk v_ijk
+% clear r_ijk v_ijk
 
 %% Deputy Properties
 % Physical Properties
@@ -130,10 +123,10 @@ plant.deputy.properties.sensors.imu.sensorSqrtCovariance_mps2 = sqrtm(plant.depu
 plant.deputy.properties.sensors.imu.processCovariance_m2ps9 = (1e-8)*eye(3);
 plant.deputy.properties.sensors.imu.processSqrtCovariance_mps3 = sqrtm(plant.deputy.properties.sensors.imu.processCovariance_m2ps9);
 
-plant.deputy.properties.sensors.gps.positionBias_m = [0;0;0];
-plant.deputy.properties.sensors.gps.positionCovariance_m2 = 1000*eye(3);
+plant.deputy.properties.sensors.gps.positionBias_m = 10 * [1;1;1];
+plant.deputy.properties.sensors.gps.positionCovariance_m2 = 100*eye(3);
 plant.deputy.properties.sensors.gps.positionSqrtCovariance_m = sqrtm(plant.deputy.properties.sensors.gps.positionCovariance_m2);
-plant.deputy.properties.sensors.gps.velocityBias_mps = [0;0;0];
+plant.deputy.properties.sensors.gps.velocityBias_mps = 10 * [1;1;1];
 plant.deputy.properties.sensors.gps.velocityCovariance_m2ps2 = 10*eye(3);
 plant.deputy.properties.sensors.gps.velocitySqrtCovariance_m2ps2 = sqrtm(plant.deputy.properties.sensors.gps.velocityCovariance_m2ps2);
 % Initial Conditions
@@ -194,7 +187,7 @@ plant.deputy.initialConditions.cartesianState.positionZ_J2000_m = r_ijk(3);
 plant.deputy.initialConditions.cartesianState.velocityX_J2000_m = v_ijk(1);
 plant.deputy.initialConditions.cartesianState.velocityY_J2000_m = v_ijk(2);
 plant.deputy.initialConditions.cartesianState.velocityZ_J2000_m = v_ijk(3);
-clear r_ijk v_ijk
+% clear r_ijk v_ijk
 clear osc_oe mean_oe
 %% Relative RTN States
 relativeState(1, 1) = plant.deputy.initialConditions.cartesianState.positionX_J2000_m - plant.chief.initialConditions.cartesianState.positionX_J2000_m;
@@ -373,9 +366,63 @@ plant.chief.initialConditions.damicoROE.relativeInclinationY = -damicoROE(6);
 
 clear damicoROE
 
+%% GNC
+gnc.modes.science = deg2rad([170, 190]);
+gnc.modes.formationBreak = deg2rad([190, 192.2]);
+gnc.modes.passive = deg2rad([192.2, 163.6]);
+gnc.modes.formationAcquisition = deg2rad([163.6, 170]);
+plant.chief.initialConditions.cartesianState
+gnc.navigation.stateInit = [
+    plant.chief.initialConditions.cartesianState.positionX_J2000_m;
+    plant.chief.initialConditions.cartesianState.positionY_J2000_m;
+    plant.chief.initialConditions.cartesianState.positionZ_J2000_m;
+    plant.chief.initialConditions.cartesianState.velocityX_J2000_m;
+    plant.chief.initialConditions.cartesianState.velocityY_J2000_m;
+    plant.chief.initialConditions.cartesianState.velocityZ_J2000_m;
+
+    plant.deputy.initialConditions.cartesianState.positionX_J2000_m;
+    plant.deputy.initialConditions.cartesianState.positionY_J2000_m;
+    plant.deputy.initialConditions.cartesianState.positionZ_J2000_m;
+    plant.deputy.initialConditions.cartesianState.velocityX_J2000_m;
+    plant.deputy.initialConditions.cartesianState.velocityY_J2000_m;
+    plant.deputy.initialConditions.cartesianState.velocityZ_J2000_m;
+
+    plant.chief.properties.sensors.gps.positionBias_m;
+    plant.chief.properties.sensors.gps.velocityBias_mps;
+
+    plant.chief.properties.sensors.imu.bias_mps2;
+    plant.deputy.properties.sensors.imu.bias_mps2
+];
+
+covInit = eye(length(gnc.navigation.stateInit));
+covInit(19:24,19:24) = 0.01*eye(6);
+gnc.navigation.covarianceInit = covInit;
+
+R = zeros(18,18);
+R(1:3,1:3) = plant.chief.properties.sensors.gps.positionCovariance_m2;
+R(4:6,4:6) = plant.chief.properties.sensors.gps.velocityCovariance_m2ps2;
+R(7:9,7:9) = plant.chief.properties.sensors.imu.sensorCovariance_m2ps4;
+R(10:12,10:12) = plant.deputy.properties.sensors.gps.positionCovariance_m2;
+R(13:15,13:15) = plant.deputy.properties.sensors.gps.velocityCovariance_m2ps2;
+R(16:18,16:18) = plant.deputy.properties.sensors.imu.sensorCovariance_m2ps4;
+gnc.navigation.R = R;
+
+Q = eye(24);
+Q(4:6,4:6) = 0.1*eye(3);
+Q(10:12,10:12) = 0.1*eye(3);
+Q(13:24,13:24) = (1e-8)*eye(12);
+gnc.navigation.Q = Q;
+
+enableGNC = 0;
+
+
+
+
 %% Generate Plant Bus
 modes               = createBus(gnc.modes);
+navigation          = createBus(gnc.navigation);
 gncBus              = addToBus(gncBus, "modes", "bus");
+gncBus              = addToBus(gncBus, "navigation", "bus");
 
 %% Generate Plant Bus
 % Environment

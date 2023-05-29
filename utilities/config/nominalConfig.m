@@ -29,7 +29,7 @@ chiefOE = [36943e3, 0.8111, deg2rad(59), deg2rad(84), deg2rad(188), deg2rad(180.
 % 
 % chiefOE = [36943e3, 0.8111, deg2rad(59), deg2rad(84), deg2rad(188), deg2rad(180.1)];
 % deputyOE = [36943e3, 0.81111, deg2rad(59.002), deg2rad(84), deg2rad(188), deg2rad(180.1)];
-delta_t = 1;
+delta_t = 6;
 loadSimConfig;
 
 clear chiefOE deputyOE J2_flag srp_flag

@@ -23,9 +23,9 @@ L_c = [-(K_c*(rss_c^2 - 3*rssx_c^2))/(rss_c^2)^(5/2),         (3*K_c*rssx_c*rssy
 ];
 
 % Deputy
-rx_d = x(1, 1);
-ry_d = x(2, 1);
-rz_d = x(3, 1);
+rx_d = x(7, 1);
+ry_d = x(8, 1);
+rz_d = x(9, 1);
 r_d = sqrt(rx_d^2+ry_d^2+rz_d^2);
 rssx_d = r_sunx - rx_d;
 rssy_d = r_suny - ry_d;
@@ -40,7 +40,7 @@ L_d = [-(K_d*(rss_d^2 - 3*rssx_d^2))/(rss_d^2)^(5/2),         (3*K_d*rssx_d*rssy
 
 H = [
     eye(6),          zeros(6, 6),       eye(6),      zeros(6, 6);
-    Lc_, zeros(3,3), zeros(3, 6),       zeros(3, 6), eye(3), zeros(3,3);
+    L_c, zeros(3,3), zeros(3, 6),       zeros(3, 6), eye(3), zeros(3,3);
     zeros(6, 6),     eye(6),            eye(6),      zeros(6, 6);
     zeros(3, 6),     L_d, zeros(3,3),   zeros(3, 6), zeros(3, 3), eye(3);
 ];

@@ -12,10 +12,10 @@ mu = dynamicsModel(mu_prev,u,sunPos,Bsrp_c,Bsrp_d,dt,mu_earth,J2,Re,AU,p_sr);
 A = getA(mu_prev,u,sunPos,Bsrp_c,Bsrp_d,dt,mu_earth,J2,Re,AU,p_sr);
 cov = A*cov_prev*A' + Q;
 % Kalman Gain
-H = getC
+H = getMatrixH(x,sunPos,Bsrp_c,Bsrp_d,p_sr);
 K = cov*H'*inv(H*cov*H'+R);
 % Expected Measurement
-Ey = getSensors(mu,zeros(3,3),zeros(4,4));
+Ey = measurementModel(x,u,Bsrp_c,Bsrp_d,p_sr,sunPos,Re,AU);
 mu = mu + K*(y-Ey);
 cov = cov - K*C*cov;
 

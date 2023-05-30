@@ -19,5 +19,6 @@ K = cov*H'*inv(S);
 Ey = measurementModel(mu,u,Bsrp_c,Bsrp_d,p_sr,sunPos,Re,AU);
 mu = mu + K*(y-Ey);
 cov = cov - K*S*K';
+% cov = cov - K*H*cov;
 
 end

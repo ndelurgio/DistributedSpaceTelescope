@@ -1,13 +1,15 @@
 OE = [15000e3;0.5;deg2rad(10);deg2rad(0);deg2rad(20);deg2rad(0)];
 ROEi = 1/OE(1) * [0;4000;300;300;50;40];
-ROEf = 1/OE(1) * [0;2000;300;300;50;40];
+% ROEf = 1/OE(1) * [0;2000;300;300;50;40];
+ROEf = 1/OE(1) * [0;4500;250;200;50;90];
+
 
 dROE = ROEf - ROEi;
 
 mu = 3.986004419e14;
 n = meanMotion(mu,OE(1));
 T = 2*pi/n;
-T_duration = 3*T;
+T_duration = 2*T;
 
 [maneuverTimes, maneuverLocations, maneuverVectors, dv_total] = computeManeuver(dROE,T_duration, OE);
 

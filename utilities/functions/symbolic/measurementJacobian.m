@@ -32,7 +32,7 @@ h = [
     SRPx + ux + bax;
     SRPy + uy + bay;
     SRPz + uz + baz;
-]
+];
 
 jac = jacobian(h,[rx,ry,rz,vx,vy,vz,brx,bry,brz,bvx,bvy,bvz,bax,bay,baz]);
 syms r

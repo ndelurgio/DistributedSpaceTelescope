@@ -393,6 +393,24 @@ gnc.navigation.stateInit = [
     plant.chief.properties.sensors.imu.bias_mps2;
     plant.deputy.properties.sensors.imu.bias_mps2
 ];
+gnc.navigation.measurementInit = [
+    plant.chief.initialConditions.cartesianState.positionX_J2000_m;
+    plant.chief.initialConditions.cartesianState.positionY_J2000_m;
+    plant.chief.initialConditions.cartesianState.positionZ_J2000_m;
+    plant.chief.initialConditions.cartesianState.velocityX_J2000_m;
+    plant.chief.initialConditions.cartesianState.velocityY_J2000_m;
+    plant.chief.initialConditions.cartesianState.velocityZ_J2000_m;
+    zeros(3,1);
+
+    plant.deputy.initialConditions.cartesianState.positionX_J2000_m;
+    plant.deputy.initialConditions.cartesianState.positionY_J2000_m;
+    plant.deputy.initialConditions.cartesianState.positionZ_J2000_m;
+    plant.deputy.initialConditions.cartesianState.velocityX_J2000_m;
+    plant.deputy.initialConditions.cartesianState.velocityY_J2000_m;
+    plant.deputy.initialConditions.cartesianState.velocityZ_J2000_m;
+    zeros(3,1);
+    
+];
 
 covInit = eye(length(gnc.navigation.stateInit));
 covInit(19:24,19:24) = 0.01*eye(6);

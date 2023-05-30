@@ -1,4 +1,4 @@
-function [mu,cov] = ekf(mu_prev,cov_prev, y, u, Bsrp_c, Bsrp_d, sunPos, dt, Q, R)
+function [mu,cov,A,H] = ekf(mu_prev,cov_prev, y, u, Bsrp_c, Bsrp_d, sunPos, dt, Q, R)
 
 % CONSTANTS
 mu_earth = 3.986004419e14;
@@ -12,13 +12,12 @@ mu = dynamicsModel(mu_prev,u,sunPos,Bsrp_c,Bsrp_d,dt,mu_earth,J2,Re,AU,p_sr);
 A = getA(mu_prev,u,sunPos,Bsrp_c,Bsrp_d,dt,mu_earth,J2,Re,AU,p_sr);
 cov = A*cov_prev*A' + Q;
 % Kalman Gain
-H = getMatrixH(mu,sunPos,Bsrp_c,Bsrp_d,p_sr);
-K = cov*H'*inv(H*cov*H'+R);
+H = getMatrixH(mu,sunPos,Bsrp_c,Bsrp_d,AU,p_sr);
+S = H*cov*H'+R;  % innovation covariance
+K = cov*H'*inv(S);
 % Expected Measurement
-Ey = measurementModel(x,u,Bsrp_c,Bsrp_d,p_sr,sunPos,Re,AU);
+Ey = measurementModel(mu,u,Bsrp_c,Bsrp_d,p_sr,sunPos,Re,AU);
 mu = mu + K*(y-Ey);
-cov = cov - K*C*cov;
-
+cov = cov - K*S*K';
 
 end
-

@@ -6,7 +6,7 @@
 % deputyOE = eccentricROE2deputyOE(ROE, chiefOE);
 %1.2903e-06, 3.4317e-06
 t_epoch = datetime(2024,6,1);
-t_final = t_epoch + days(0.5);
+t_final = t_epoch + days(0.1);
 J2_flag = 1;
 srp_flag = 0;
 

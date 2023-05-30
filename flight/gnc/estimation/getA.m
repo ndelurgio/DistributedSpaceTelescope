@@ -55,9 +55,9 @@ Ad = [                                                                          
 
 
 
-A = [Ad, zeros(6,6), zeros(12,12);
-     zeros(6,6), Ac, zeros(12,12);
-     zeros(12,12), zeros(12,12), zeros(12,12)];
+A = [Ad, zeros(6,6), zeros(6,12);
+     zeros(6,6), Ac, zeros(6,12);
+     zeros(12,8), zeros(12,8), zeros(12,8)];
 Ad = eye(24,24) + dt*A;
 end
 

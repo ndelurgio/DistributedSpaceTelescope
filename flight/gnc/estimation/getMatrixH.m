@@ -1,4 +1,4 @@
-function H = getMatrixH(x,sunPos,Bsrp_c,Bsrp_d,p_sr)
+function H = getMatrixH(x,sunPos,Bsrp_c,Bsrp_d,AU,p_sr)
 % Computation of the sensitivity matrix H
 
 % Sun

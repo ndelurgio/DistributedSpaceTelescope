@@ -1,4 +1,4 @@
-function [mu,cov] = ukf(mu_prev,cov_prev, y, u, Bsrp_c, Bsrp_d, sunPos, dt, Q, R)
+function [mu,cov,mu_prefit] = ukf(mu_prev,cov_prev, y, u, Bsrp_c, Bsrp_d, sunPos, dt, Q, R)
 
 % CONSTANTS
 mu_earth = 3.986004419e14;
@@ -15,6 +15,7 @@ for i = 1:(2*n+1)
     x(:,i) = dynamicsModel(x(:,i),u,sunPos,Bsrp_c,Bsrp_d,dt,mu_earth,J2,Re,AU,p_sr);
 end
 [mu,cov] = UTinv(x,w);
+mu_prefit = mu;
 cov = cov + Q;
 % Update
 [x,w] = UT(mu,cov);

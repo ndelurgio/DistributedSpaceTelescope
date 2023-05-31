@@ -394,20 +394,20 @@ gnc.navigation.stateInit = [
     plant.deputy.properties.sensors.imu.bias_mps2
 ];
 gnc.navigation.measurementInit = [
-    plant.chief.initialConditions.cartesianState.positionX_J2000_m;
-    plant.chief.initialConditions.cartesianState.positionY_J2000_m;
-    plant.chief.initialConditions.cartesianState.positionZ_J2000_m;
-    plant.chief.initialConditions.cartesianState.velocityX_J2000_m;
-    plant.chief.initialConditions.cartesianState.velocityY_J2000_m;
-    plant.chief.initialConditions.cartesianState.velocityZ_J2000_m;
+    plant.chief.initialConditions.cartesianState.positionX_J2000_m + plant.chief.properties.sensors.gps.positionBias_m(1);
+    plant.chief.initialConditions.cartesianState.positionY_J2000_m + plant.chief.properties.sensors.gps.positionBias_m(2);
+    plant.chief.initialConditions.cartesianState.positionZ_J2000_m + plant.chief.properties.sensors.gps.positionBias_m(3);
+    plant.chief.initialConditions.cartesianState.velocityX_J2000_m + plant.chief.properties.sensors.gps.velocityBias_mps(1);
+    plant.chief.initialConditions.cartesianState.velocityY_J2000_m + plant.chief.properties.sensors.gps.velocityBias_mps(2);
+    plant.chief.initialConditions.cartesianState.velocityZ_J2000_m + plant.chief.properties.sensors.gps.velocityBias_mps(3);
     zeros(3,1);
 
-    plant.deputy.initialConditions.cartesianState.positionX_J2000_m;
-    plant.deputy.initialConditions.cartesianState.positionY_J2000_m;
-    plant.deputy.initialConditions.cartesianState.positionZ_J2000_m;
-    plant.deputy.initialConditions.cartesianState.velocityX_J2000_m;
-    plant.deputy.initialConditions.cartesianState.velocityY_J2000_m;
-    plant.deputy.initialConditions.cartesianState.velocityZ_J2000_m;
+    plant.deputy.initialConditions.cartesianState.positionX_J2000_m + plant.deputy.properties.sensors.gps.positionBias_m(1);
+    plant.deputy.initialConditions.cartesianState.positionY_J2000_m + plant.deputy.properties.sensors.gps.positionBias_m(2);
+    plant.deputy.initialConditions.cartesianState.positionZ_J2000_m + plant.deputy.properties.sensors.gps.positionBias_m(3);
+    plant.deputy.initialConditions.cartesianState.velocityX_J2000_m + plant.deputy.properties.sensors.gps.velocityBias_mps(1);
+    plant.deputy.initialConditions.cartesianState.velocityY_J2000_m + plant.deputy.properties.sensors.gps.velocityBias_mps(2);
+    plant.deputy.initialConditions.cartesianState.velocityZ_J2000_m + plant.deputy.properties.sensors.gps.velocityBias_mps(3);
     zeros(3,1);
     
 ];

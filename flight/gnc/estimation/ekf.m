@@ -1,4 +1,4 @@
-function [mu,cov,A,H] = ekf(mu_prev,cov_prev, y, u, Bsrp_c, Bsrp_d, sunPos, dt, Q, R)
+function [mu,cov,A,H,mu_prefit] = ekf(mu_prev,cov_prev, y, u, Bsrp_c, Bsrp_d, sunPos, dt, Q, R)
 
 % CONSTANTS
 mu_earth = 3.986004419e14;
@@ -9,6 +9,7 @@ p_sr = 4.5344321e-6;
 
 % Predict
 mu = dynamicsModel(mu_prev,u,sunPos,Bsrp_c,Bsrp_d,dt,mu_earth,J2,Re,AU,p_sr);
+mu_prefit = mu;
 A = getA(mu_prev,u,sunPos,Bsrp_c,Bsrp_d,dt,mu_earth,J2,Re,AU,p_sr);
 cov = A*cov_prev*A' + Q;
 % Kalman Gain

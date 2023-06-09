@@ -32,3 +32,10 @@ codegen/
 # Cloud based storage dotfile
 .MATLABDriveTag
 .DS_Store
+
+# MICE and kernels
+mice/
+kernels/
+
+# CVX
+cvx/

@@ -431,10 +431,8 @@ Q(10:12,10:12) = 0.1*eye(3);
 Q(13:24,13:24) = (1e-8)*eye(12);
 gnc.navigation.Q = Q;
 
-enableGNC = 0;
-
-
-
+enableGNC = 1;
+UKF = 1;
 
 %% Generate Plant Bus
 modes               = createBus(gnc.modes);

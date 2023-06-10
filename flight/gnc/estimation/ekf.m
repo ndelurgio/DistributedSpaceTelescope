@@ -1,4 +1,4 @@
-function [mu,cov,A,H,mu_prefit] = ekf(mu_prev,cov_prev, y, u, Bsrp_c, Bsrp_d, sunPos, dt, Q, R)
+function [mu,cov,mu_prefit] = ekf(mu_prev,cov_prev, y, u, Bsrp_c, Bsrp_d, sunPos, dt, Q, R)
 
 % CONSTANTS
 mu_earth = 3.986004419e14;

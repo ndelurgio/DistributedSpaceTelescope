@@ -8,7 +8,7 @@
 t_epoch = datetime(2024,6,1);
 t_final = t_epoch + days(1);
 J2_flag = 1;
-srp_flag = 0;
+srp_flag = 1;
 
 [sunPosData, sunTimeData] = generateSunEphemeris(t_epoch,t_final,60);
 sunPos = getSunPosition(sunPosData, sunTimeData, 1);

@@ -2,16 +2,16 @@ close all
 % xPosEKF = sim{10}.Values.Data(:,1);
 % yPosEKF = sim{10}.Values.Data(:,2);
 % zPosEKF = sim{10}.Values.Data(:,3);
-xPosEKF = telem.("Mean EKF New")(:,1);
-yPosEKF = telem.("Mean EKF New")(:,2);
-zPosEKF = telem.("Mean EKF New")(:,3);
+xPosEKF = telem.("Mean Filter New")(:,1);
+yPosEKF = telem.("Mean Filter New")(:,2);
+zPosEKF = telem.("Mean Filter New")(:,3);
 
 % xPosUKF = sim{13}.Values.Data(:,1);
 % yPosUKF = sim{13}.Values.Data(:,2);
 % zPosUKF = sim{13}.Values.Data(:,3);
-xPosUKF = telem.("Mean UKF New")(:,1);
-yPosUKF = telem.("Mean UKF New")(:,2);
-zPosUKF = telem.("Mean UKF New")(:,3);
+xPosUKF = telem.("Mean Filter New")(:,1);
+yPosUKF = telem.("Mean Filter New")(:,2);
+zPosUKF = telem.("Mean Filter New")(:,3);
 
 xPosTrue = telem.("Chief Cartesian State J2000.positionX_J2000_m");
 yPosTrue = telem.("Chief Cartesian State J2000.positionY_J2000_m");
@@ -33,22 +33,22 @@ xUKFerr = xPosUKF(3:end) - xPosTrue(1:end-2);
 yUKFerr = yPosUKF(3:end) - yPosTrue(1:end-2);
 zUKFerr = zPosUKF(3:end) - zPosTrue(1:end-2);
 
-xvar = telem.("Cov EKF New")(:,1,1);
+xvar = telem.("Cov Filter New")(:,1,1);
 xsigma_ekf = sqrt(xvar(:));
 
-yvar = telem.("Cov EKF New")(:,2,2);
+yvar = telem.("Cov Filter New")(:,2,2);
 ysigma_ekf = sqrt(yvar(:));
 
-zvar = telem.("Cov EKF New")(:,3,3);
+zvar = telem.("Cov Filter New")(:,3,3);
 zsigma_ekf = sqrt(zvar(:));
 
-xvar = telem.("Cov UKF New")(:,1,1);
+xvar = telem.("Cov Filter New")(:,1,1);
 xsigma_ukf = sqrt(xvar(:));
 
-yvar = telem.("Cov UKF New")(:,2,2);
+yvar = telem.("Cov Filter New")(:,2,2);
 ysigma_ukf = sqrt(yvar(:));
 
-zvar = telem.("Cov UKF New")(:,3,3);
+zvar = telem.("Cov Filter New")(:,3,3);
 zsigma_ukf = sqrt(zvar(:));
 
 figure
@@ -111,13 +111,13 @@ ylabel("Z Error [m]")
 
 
 
-xVelEKF = telem.("Mean EKF New")(:,4);
-yVelEKF = telem.("Mean EKF New")(:,5);
-zVelEKF = telem.("Mean EKF New")(:,6);
+xVelEKF = telem.("Mean Filter New")(:,4);
+yVelEKF = telem.("Mean Filter New")(:,5);
+zVelEKF = telem.("Mean Filter New")(:,6);
 
-xVelUKF = telem.("Mean UKF New")(:,4);
-yVelUKF = telem.("Mean UKF New")(:,5);
-zVelUKF = telem.("Mean UKF New")(:,6);
+xVelUKF = telem.("Mean Filter New")(:,4);
+yVelUKF = telem.("Mean Filter New")(:,5);
+zVelUKF = telem.("Mean Filter New")(:,6);
 
 xVelTrue = telem.("Chief Cartesian State J2000.velocityX_J2000_m");
 yVelTrue = telem.("Chief Cartesian State J2000.velocityY_J2000_m");
@@ -131,22 +131,22 @@ xUKFerr = xVelUKF(3:end) - xVelTrue(1:end-2);
 yUKFerr = yVelUKF(3:end) - yVelTrue(1:end-2);
 zUKFerr = zVelUKF(3:end) - zVelTrue(1:end-2);
 
-xvar = telem.("Cov EKF New")(:,4,4);
+xvar = telem.("Cov Filter New")(:,4,4);
 xsigma_ekf = sqrt(xvar(:));
 
-yvar = telem.("Cov EKF New")(:,5,5);
+yvar = telem.("Cov Filter New")(:,5,5);
 ysigma_ekf = sqrt(yvar(:));
 
-zvar = telem.("Cov EKF New")(:,6,6);
+zvar = telem.("Cov Filter New")(:,6,6);
 zsigma_ekf = sqrt(zvar(:));
 
-xvar = telem.("Cov UKF New")(:,4,4);
+xvar = telem.("Cov Filter New")(:,4,4);
 xsigma_ukf = sqrt(xvar(:));
 
-yvar = telem.("Cov UKF New")(:,5,5);
+yvar = telem.("Cov Filter New")(:,5,5);
 ysigma_ukf = sqrt(yvar(:));
 
-zvar = telem.("Cov UKF New")(:,6,6);
+zvar = telem.("Cov Filter New")(:,6,6);
 zsigma_ukf = sqrt(zvar(:));
 
 figure

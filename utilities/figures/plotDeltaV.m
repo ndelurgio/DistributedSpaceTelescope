@@ -21,3 +21,24 @@ ylabel("\Deltav [m/s]")
 xlabel("t [hr]")
 % legend(["Accumulated \Delta v","CSC Mass"])
 legend(["OSC", "CSC"])
+
+figure
+% yyaxis left
+hold on
+% plot(time/3600, cumsum(vecnorm(telem.("accel"), 2, 2)))
+% plot(time/3600,dv_chief,Linewidth=2)
+% plot(time/3600,dv_deputy,Linewidth=2)
+% yyaxis right
+subplot 121
+plot(time/3600,telem.("Chief Mass"),Linewidth=2)
+ylabel("Mass [kg]")
+legend(["OSC"])
+% ylabel("\Deltav [m/s]")
+xlabel("t [hr]")
+subplot 122
+plot(time/3600,telem.("Deputy Mass"),Linewidth=2)
+ylabel("Mass [kg]")
+% ylabel("\Deltav [m/s]")
+xlabel("t [hr]")
+% legend(["Accumulated \Delta v","CSC Mass"])
+legend(["CSC"])

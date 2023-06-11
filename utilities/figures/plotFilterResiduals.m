@@ -1,7 +1,7 @@
-mu_EKF = telem.("Mean EKF New")(:, 1:6);
-mu_EKF_prefit = telem.("Prefit mu EKF")(:, 1:6);
-mu_UKF = telem.("Mean UKF New")(:, 1:6);
-mu_UKF_prefit = telem.("Prefit mu UKF")(:, 1:6);
+mu_EKF = telem.("Mean Filter New")(:, 1:6);
+mu_EKF_prefit = telem.("Prefit mu Filter")(:, 1:6);
+mu_UKF = telem.("Mean Filter New")(:, 1:6);
+mu_UKF_prefit = telem.("Prefit mu Filter")(:, 1:6);
 
 xPosTrue = telem.("Chief Cartesian State J2000.positionX_J2000_m");
 yPosTrue = telem.("Chief Cartesian State J2000.positionY_J2000_m");
@@ -32,22 +32,22 @@ r_EKF_postfit = vecnorm(mu_EKF(3:end,:)-mu_True(1:end-2,:),2,2);
 r_UKF_prefit = vecnorm(mu_UKF_prefit(2:end,:)-mu_True(1:end-1,:),2,2);
 r_UKF_postfit = vecnorm(mu_UKF(3:end,:)-mu_True(1:end-2,:),2,2);
 
-figure
-hold on;
-% plot(time(21:end)/3600,r_EKF_prefit(20:end)-250)
-% plot(time(22:end)/3600,r_EKF_postfit(20:end)-250)
-scatter(time(21:end)/3600,r_EKF_prefit(20:end)-250, '.')
-scatter(time(22:end)/3600,r_EKF_postfit(20:end)-250, '.')
-xlabel("Time [hr]")
-ylabel("Residual")
-legend(["Pre-fit","Post-fit"])
+% figure
+% hold on;
+% % plot(time(21:end)/3600,r_EKF_prefit(20:end)-250)
+% % plot(time(22:end)/3600,r_EKF_postfit(20:end)-250)
+% scatter(time(21:end)/3600,r_EKF_prefit(20:end)-250, '.')
+% scatter(time(22:end)/3600,r_EKF_postfit(20:end)-250, '.')
+% xlabel("Time [hr]")
+% ylabel("Residual")
+% legend(["Pre-fit","Post-fit"])
 
 figure
 hold on;
 % plot(time(21:end)/3600,r_UKF_prefit(20:end)-250)
 % plot(time(22:end)/3600,r_UKF_postfit(20:end)-250)
-scatter(time(21:end)/3600,r_UKF_prefit(20:end)-250, '.')
-scatter(time(22:end)/3600,r_UKF_postfit(20:end)-250, '.')
+scatter(time(21:end)/3600,r_UKF_prefit(20:end)-200, '.')
+scatter(time(22:end)/3600,r_UKF_postfit(20:end)-200, '.')
 xlabel("Time [hr]")
 ylabel("Residual")
 legend(["Pre-fit","Post-fit"])

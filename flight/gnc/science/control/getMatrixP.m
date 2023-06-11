@@ -1,16 +1,16 @@
 function P = getMatrixP(pseudoState, theta)
 % Calculate the P matrix for Lyapunov control
 
-k = 1000;
+k = 100;
 N = 0;
 
 delta_ex = pseudoState(3);
 delta_ey = pseudoState(4);
-theta_ip = atan2(delta_ey/delta_ex);
+theta_ip = atan2(delta_ey,delta_ex);
 
 delta_ix = pseudoState(5);
 delta_iy = pseudoState(6);
-theta_oop = atan2(delta_iy/delta_ix);
+theta_oop = atan2(delta_iy,delta_ix);
 
 Jp = theta - theta_ip;
 Hp = theta - theta_oop;

@@ -206,3 +206,58 @@ xlabel("Time [hr]")
 ylabel("V_z Error [m]")
 % legend(["UKF 3-\sigma","","UKF Mean"])
 
+figure
+subplot 311
+hold on;
+area(time(20:end-1)/3600,3*xsigma_ekf(20:end-1),'FaceColor','b',FaceAlpha=0.2)
+area(time(20:end-1)/3600,-3*xsigma_ekf(20:end-1),'FaceColor','b',FaceAlpha=0.2)
+plot(time(20:end-2)/3600,xEKFerr(20:end)-mean(xEKFerr(20:end)),'b')
+xlabel("Time [hr]")
+ylabel("V_x Error [m]")
+legend(["EKF 3-\sigma","","EKF Mean"])
+
+subplot 312
+hold on;
+area(time(20:end-1)/3600,3*ysigma_ekf(20:end-1),'FaceColor','b',FaceAlpha=0.2)
+area(time(20:end-1)/3600,-3*ysigma_ekf(20:end-1),'FaceColor','b',FaceAlpha=0.2)
+plot(time(20:end-2)/3600,yEKFerr(20:end)-mean(yEKFerr(20:end)),'b')
+xlabel("Time [hr]")
+ylabel("V_y Error [m]")
+% legend(["EKF 3-\sigma","","EKF Mean"])
+
+subplot 313
+hold on;
+area(time(20:end-1)/3600,3*zsigma_ekf(20:end-1),'FaceColor','b',FaceAlpha=0.2)
+area(time(20:end-1)/3600,-3*zsigma_ekf(20:end-1),'FaceColor','b',FaceAlpha=0.2)
+plot(time(20:end-2)/3600,zEKFerr(20:end)-mean(zEKFerr(20:end)),'b')
+xlabel("Time [hr]")
+ylabel("V_z Error [m]")
+% legend(["EKF 3-\sigma","","EKF Mean"])
+
+
+figure
+subplot 311
+hold on;
+area(time(20:end-1)/3600,3*xsigma_ukf(20:end-1),'FaceColor','m',FaceAlpha=0.2)
+area(time(20:end-1)/3600,-3*xsigma_ukf(20:end-1),'FaceColor','m',FaceAlpha=0.2)
+plot(time(20:end-2)/3600,movmean(xUKFerr(20:end)-mean(xUKFerr(20:end)),10),'Color',[0.4940 0.1840 0.5560])
+xlabel("Time [hr]")
+ylabel("V_x Error [m]")
+legend(["UKF 3-\sigma","","UKF Mean"])
+
+subplot 312
+hold on;
+area(time(20:end-1)/3600,3*ysigma_ukf(20:end-1),'FaceColor','m',FaceAlpha=0.2)
+area(time(20:end-1)/3600,-3*ysigma_ukf(20:end-1),'FaceColor','m',FaceAlpha=0.2)
+plot(time(20:end-2)/3600,movmean(yUKFerr(20:end)-mean(yUKFerr(20:end)),10),'Color',[0.4940 0.1840 0.5560])
+xlabel("Time [hr]")
+ylabel("V_y Error [m]")
+% legend(["UKF 3-\sigma","","UKF Mean"])
+
+subplot 313
+hold on;
+area(time(20:end-1)/3600,3*zsigma_ukf(20:end-1),'FaceColor','m',FaceAlpha=0.2)
+area(time(20:end-1)/3600,-3*zsigma_ukf(20:end-1),'FaceColor','m',FaceAlpha=0.2)
+plot(time(20:end-2)/3600,movmean(zUKFerr(20:end)-mean(zUKFerr(20:end)),10),'Color',[0.4940 0.1840 0.5560])
+xlabel("Time [hr]")
+ylabel("V_z Error [m]")

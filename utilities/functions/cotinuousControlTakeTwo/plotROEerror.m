@@ -14,55 +14,61 @@ subplot(3,2,1)
 % title('$a\delta a$','Interpreter','latex',"FontSize",20)
 grid on;
 hold on;
-plot(t(1:60:length(roe_mat)*60),abs(a*(da(1:60:length(roe_mat)*60)-roe_mat(1,:)')),LineWidth=2)
+plot(t(1:6:length(roe_mat)*6),abs(a*(da(1:6:length(roe_mat)*6)-roe_mat(1,:)')),LineWidth=2)
 % legend(["SRP & Secular J2","Only Secular J2"])
 xlabel("t [hr]")
 ylabel('$a\delta a$ [m]','Interpreter','latex',"FontSize",20)
+xlim([0,5.5])
 
 subplot(3,2,2)
 % title("$a\delta \lambda$",'Interpreter','latex',"FontSize",20)
 grid on;
 hold on;
-plot(t(1:60:length(roe_mat)*60),abs(a*(dlam(1:60:length(roe_mat)*60)-roe_mat(2,:)')),LineWidth=2)
+plot(t(1:6:length(roe_mat)*6),abs(a*(dlam(1:6:length(roe_mat)*6)-roe_mat(2,:)')),LineWidth=2)
 % legend(["SRP & Secular J2","Only Secular J2"])
 xlabel("t [hr]")
 ylabel("$a\delta \lambda$ [m]",'Interpreter','latex',"FontSize",20)
+xlim([0,5.5])
 
 subplot(3,2,3)
 % title("$a\delta e_x$",'Interpreter','latex',"FontSize",20)
 grid on;
 hold on;
-plot(t(1:60:length(roe_mat)*60),abs(a*(dex(1:60:length(roe_mat)*60)-roe_mat(3,:)')),LineWidth=2)
+plot(t(1:6:length(roe_mat)*6),abs(a*(dex(1:6:length(roe_mat)*6)-roe_mat(3,:)')),LineWidth=2)
 % legend(["SRP & Secular J2","Only Secular J2"])
 xlabel("t [hr]")
 ylabel("$a\delta e_x$ [m]",'Interpreter','latex',"FontSize",20)
+xlim([0,5.5])
 
 subplot(3,2,4)
 % title("$a\delta e_y$",'Interpreter','latex',"FontSize",20)
 grid on;
 hold on;
-plot(t(1:60:length(roe_mat)*60),abs(a*(dey(1:60:length(roe_mat)*60)-roe_mat(4,:)')),LineWidth=2)
+plot(t(1:6:length(roe_mat)*6),abs(a*(dey(1:6:length(roe_mat)*6)-roe_mat(4,:)')),LineWidth=2)
 % legend(["SRP & Secular J2","Only Secular J2"])
 xlabel("t [hr]")
 ylabel("$a\delta e_y$ [m]",'Interpreter','latex',"FontSize",20)
+xlim([0,5.5])
 
 subplot(3,2,5)
 % title("$a\delta i_x$",'Interpreter','latex',"FontSize",20)
 grid on;
 hold on;
-plot(t(1:60:length(roe_mat)*60),abs(a*(dix(1:60:length(roe_mat)*60)-roe_mat(5,:)')),LineWidth=2)
+plot(t(1:6:length(roe_mat)*6),abs(a*(dix(1:6:length(roe_mat)*6)-roe_mat(5,:)')),LineWidth=2)
 % legend(["SRP & Secular J2","Only Secular J2"])
 xlabel("t [hr]")
 ylabel("$a\delta i_x$ [m]",'Interpreter','latex',"FontSize",20)
+xlim([0,5.5])
 
 subplot(3,2,6)
 % title("$a\delta i_y$",'Interpreter','latex',"FontSize",20)
 grid on;
 hold on;
-plot(t(1:60:length(roe_mat)*60),a*(diy(1:60:length(roe_mat)*60)-roe_mat(6,:)'),LineWidth=2)
+plot(t(1:6:length(roe_mat)*6),a*(diy(1:6:length(roe_mat)*6)-roe_mat(6,:)'),LineWidth=2)
 % legend(["SRP & Secular J2","Only Secular J2"])
 xlabel("t [hr]")
 ylabel("$a\delta i_y$ [m]",'Interpreter','latex',"FontSize",20)
+xlim([0,5.5])
 
 clear a
 

@@ -9,8 +9,10 @@ plot(a*deputyROE(:,2),a*deputyROE(:,1),'Color','blue',LineWidth=2)
 % legend(["Deputy Trajectory","Start","Finish"],'Location','northwest')
 plot(a*roe_mat(2,:),a*roe_mat(1,:),'Color','red',LineWidth=2)
 plot(a*telem.("Chief Mean Eccentric Singular ROE True.relativeLongitude")(telem.("Chief Thrust Cmd") == 1),a*telem.("Chief Mean Eccentric Singular ROE True.relativeSemiMajorAxis")(telem.("Chief Thrust Cmd") == 1),'Color',[0.4660 0.6740 0.1880],LineWidth=2)
-scatter(a*deputyROE(1:steps:end,2),a*deputyROE(1:steps:end,1),'filled','magenta')
-legend(["Deputy Command","Linear Keplerian","Nonlinear J2 & SRP","Waypoints"])
+% scatter(a*deputyROE(1:steps:end,2),a*deputyROE(1:steps:end,1),'filled','magenta')
+scatter(a*deputyROE(1,2),a*deputyROE(1,1),'filled','green')
+scatter(a*deputyROE(steps+1,2),a*deputyROE(steps+1,1),'filled','magenta')
+legend(["Deputy Command","Linear Keplerian","Nonlinear J2 & SRP","Start","Waypoint"])
 % plot(a*roeMatrix(:,2),a*roeMatrix(:,1),'Color','red',LineWidth=2)
 % plot(a*telem.("Mean Eccentric Singular ROE True.relativeLongitude")(telem.("Thrust Cmd") == 1),a*telem.("Mean Eccentric Singular ROE True.relativeSemiMajorAxis")(telem.("Thrust Cmd") == 1),'Color','red',LineWidth=2)
 % axis equal;
@@ -27,8 +29,9 @@ plot(a*deputyROE(:,3),a*deputyROE(:,4),'Color','blue',LineWidth=2)% plot(a*telem
 % legend(["Deputy Trajectory","Start","Finish"],'Location','southwest')
 plot(a*roe_mat(3,:),a*roe_mat(4,:),'Color','red',LineWidth=2)
 plot(a*telem.("Chief Mean Eccentric Singular ROE True.relativeEccentricityX")(telem.("Chief Thrust Cmd") == 1),a*telem.("Chief Mean Eccentric Singular ROE True.relativeEccentricityY")(telem.("Chief Thrust Cmd") == 1),'Color',[0.4660 0.6740 0.1880],LineWidth=2)
-scatter(a*deputyROE(1:steps:end,3),a*deputyROE(1:steps:end,4),'filled','magenta')
-legend(["Deputy Command","Linear Keplerian","Nonlinear J2 & SRP","Waypoints"])
+scatter(a*deputyROE(1,3),a*deputyROE(1,4),'filled','green')
+scatter(a*deputyROE(steps+1,3),a*deputyROE(steps+1,4),'filled','magenta')
+legend(["Deputy Command","Linear Keplerian","Nonlinear J2 & SRP","Start","Waypoint"])
 % axis equal;
 grid on;
 ylabel('$a\delta e_y$ [m]','Interpreter','latex',"FontSize",20)
@@ -44,8 +47,9 @@ plot(a*deputyROE(:,5),a*deputyROE(:,6),'Color','blue',LineWidth=2)% plot(a*telem
 % legend(["Deputy Trajectory","Start","Finish"],'Location','northwest')
 plot(a*roe_mat(5,:),a*roe_mat(6,:),'Color','red',LineWidth=2)
 plot(a*telem.("Chief Mean Eccentric Singular ROE True.relativeInclinationX")(telem.("Chief Thrust Cmd") == 1),a*telem.("Chief Mean Eccentric Singular ROE True.relativeInclinationY")(telem.("Chief Thrust Cmd") == 1),'Color',[0.4660 0.6740 0.1880],LineWidth=2)
-scatter(a*deputyROE(1:steps:end,5),a*deputyROE(1:steps:end,6),'filled','magenta')
-legend(["Deputy Command","Linear Keplerian","Nonlinear J2 & SRP","Waypoints"])
+scatter(a*deputyROE(1,5),a*deputyROE(1,6),'filled','green')
+scatter(a*deputyROE(steps+1,5),a*deputyROE(steps+1,6),'filled','magenta')
+legend(["Deputy Command","Linear Keplerian","Nonlinear J2 & SRP","Start","Waypoint"])
 % axis equal;
 grid on;
 ylabel('$a\delta i_y$ [m]','Interpreter','latex',"FontSize",20)

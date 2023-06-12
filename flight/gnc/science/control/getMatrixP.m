@@ -1,8 +1,8 @@
 function P = getMatrixP(pseudoState, theta)
 % Calculate the P matrix for Lyapunov control
 
-k = 100;
-N = 0;
+k = 1000;
+N = 8;
 
 delta_ex = pseudoState(3);
 delta_ey = pseudoState(4);

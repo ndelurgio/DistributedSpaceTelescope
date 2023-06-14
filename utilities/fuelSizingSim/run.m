@@ -42,7 +42,7 @@ rho = 50;
 dv_total = [];
 Om = Om0;
 w = w0;
-for iter = 1:n_orbits-1
+for iter = 1:n_orbits
     % J2 Perturbations
     dOm_J2 = (kappa*-2*cos(i))*t_orbit;
     dw_J2 = kappa*(5*cos(i)^2-1)*t_orbit;

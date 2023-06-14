@@ -9,9 +9,9 @@ frame = 'ECLIPJ2000';
 abcorr = 'NONE';
 t_epoch = convertTo(t_epoch,'epochtime', 'Epoch','2000-01-01');
 t_final = convertTo(t_final,'epochtime', 'Epoch','2000-01-01');
-time = t_epoch:time_step:t_final;
+time = double(t_epoch):time_step:double(t_final);
 [sunPosition,~] = cspice_spkezr('SUN',time,frame,abcorr,'EARTH');
 sunPosition = sunPosition(1:3,:)*1000;
-time = double(time - t_epoch);
+time = double(time - double(t_epoch));
 end
 

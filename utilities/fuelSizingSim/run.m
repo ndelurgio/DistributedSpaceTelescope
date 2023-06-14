@@ -11,7 +11,7 @@ t_mission = 2*365*24*3600;
 t_orbit = 2*pi/n;
 n_orbits = floor(t_mission/t_orbit);
 
-t_control = 60;
+t_control = 30;
 nu0 = deg2rad(170);
 nuf = deg2rad(190);
 waypoint_dt = (nu2M(nu,e) - nu2M(nu0,e))/n;
@@ -40,19 +40,20 @@ t_final = t_epoch + seconds(t_mission);
 rho = 50;
 
 dv_total = [];
+ROEmat = zeros(6,n_orbits);
 Om = Om0;
 w = w0;
 for iter = 1:n_orbits
     % J2 Perturbations
-    dOm_J2 = (kappa*-2*cos(i))*t_orbit;
-    dw_J2 = kappa*(5*cos(i)^2-1)*t_orbit;
+    Om = Om + (kappa*-2*cos(i))*t_orbit;
+    w = w + kappa*(5*cos(i)^2-1)*t_orbit;
 
     % SRP Perturbations
     % r_sunSC = 0
     % Bsrp = Csrp * A / m;
     % Fsrp = Bsrp * P * (AU / relative_r)^2 / relative_r;
     
-    % r_sun = sunPosition(:,iter);
+    r_sun = sunPosition(:,iter);
     % v_sun = (sunPosition(:,iter+1) - r_sun)/t_orbit;
     % oe_sun = eci2oe([r_sun;v_sun],mu)
     
@@ -60,8 +61,8 @@ for iter = 1:n_orbits
     % dw_SRP = 0;
 
     % Update parameters
-    Om = Om + dOm_J2 + dOm_SRP;
-    w = w + dw_J2 + dw_SRP;
+    % Om = Om + dOm_J2 + dOm_SRP;
+    % w = w + dw_J2 + dw_SRP;
 
     [r_chief, v_chief] = oe2eci(a,e,i,Om,w,nu,mu);  % at apogee
     
@@ -72,6 +73,7 @@ for iter = 1:n_orbits
     deputyOE(6,1) = nu2M(real(deputyOE(6,1)),deputyOE(2,1));
     chiefOE = [a;e;i;Om;w;nu2M(nu,e)];
     ROE = computeEccentricSingularROE(chiefOE,deputyOE);
+    ROEmat(:,iter) = ROE;
 
     % Get time-varying matrices
     Ad = zeros(6,6,steps);

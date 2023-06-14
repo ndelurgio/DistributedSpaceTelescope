@@ -17,6 +17,17 @@ nuf = deg2rad(190);
 waypoint_dt = (nu2M(nu,e) - nu2M(nu0,e))/n;
 steps = floor(waypoint_dt/t_control);
 
+% J2 Parameters
+J2 = 0.108263e-2;
+Re = 6.378e6;
+eta = sqrt(1-e^2);
+kappa = 3/4*J2*Re^2*sqrt(mu)/(a^(7/2)*eta^4);
+
+% SRP Parameters
+% Csrp = 1.29;
+% A = 3.34;
+% AU = 1.496e11;
+% P = 4.5344321e-6;
 
 % SPICE SETUP
 t_epoch = datetime(2024,6,1);
@@ -31,11 +42,29 @@ rho = 50;
 dv_total = [];
 Om = Om0;
 w = w0;
-for iter = 1:n_orbits
-    Om = Om + 0;
-    w = w + 0;
+for iter = 1:n_orbits-1
+    % J2 Perturbations
+    dOm_J2 = (kappa*-2*cos(i))*t_orbit;
+    dw_J2 = kappa*(5*cos(i)^2-1)*t_orbit;
+
+    % SRP Perturbations
+    % r_sunSC = 0
+    % Bsrp = Csrp * A / m;
+    % Fsrp = Bsrp * P * (AU / relative_r)^2 / relative_r;
+    
+    % r_sun = sunPosition(:,iter);
+    % v_sun = (sunPosition(:,iter+1) - r_sun)/t_orbit;
+    % oe_sun = eci2oe([r_sun;v_sun],mu)
+    
+    % dOm_SRP = 0;
+    % dw_SRP = 0;
+
+    % Update parameters
+    Om = Om + dOm_J2 + dOm_SRP;
+    w = w + dw_J2 + dw_SRP;
+
     [r_chief, v_chief] = oe2eci(a,e,i,Om,w,nu,mu);  % at apogee
-    r_sun = sunPosition(:,iter);
+    
     r_dep = r_chief + rho * (r_sun - r_chief)/norm(r_sun - r_chief);
     v_dep = v_chief;
     deputyECI = [r_dep; v_dep];
